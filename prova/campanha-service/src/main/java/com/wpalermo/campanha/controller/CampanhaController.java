@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
+import com.wpalermo.campanha.exception.DataVigenciaException;
 import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ICampanhaService;
 import com.wpalermo.campanha.utils.MensagensEnum;
@@ -72,7 +73,7 @@ public class CampanhaController {
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.SUCESSO.mensagem);
 
 			return response;
-		} catch (CampanhaException e) {
+		} catch (CampanhaException | DataVigenciaException e) {
 			CampanhaResponse response = new CampanhaResponse(null, MensagensEnum.ERRO.mensagem);
 			response.setErro(e.getLocalizedMessage());
 			return response;

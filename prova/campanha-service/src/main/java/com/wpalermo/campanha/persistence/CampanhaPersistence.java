@@ -90,5 +90,10 @@ public class CampanhaPersistence {
 			throw new CampanhaException("ID da campanha nao encontrado - ID: " + campanhaId);
 
 	}
+	
+	
+	public static LinkedList<Campanha> getAll(){
+		return campanhas;
+	}
 
 }

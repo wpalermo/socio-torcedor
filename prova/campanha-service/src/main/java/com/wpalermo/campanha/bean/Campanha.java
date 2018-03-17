@@ -1,6 +1,6 @@
 package com.wpalermo.campanha.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,10 +11,10 @@ public class Campanha {
 	private Integer idTimeCoracao;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
-	private Date dataInicioVigencia;
+	private LocalDate dataInicioVigencia;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
-	private Date dataFimVigencia;
+	private LocalDate dataFimVigencia;
 	
 	
 	
@@ -38,19 +38,19 @@ public class Campanha {
 	public void setNomeCampanha(String nomeCampanha) {
 		this.nomeCampanha = nomeCampanha;
 	}
-
-	public Date getDataInicioVigencia() {
+	public LocalDate getDataInicioVigencia() {
 		return dataInicioVigencia;
 	}
-	public void setDataInicioVigencia(Date dataInicioVigencia) {
+	public void setDataInicioVigencia(LocalDate dataInicioVigencia) {
 		this.dataInicioVigencia = dataInicioVigencia;
 	}
-	public Date getDataFimVigencia() {
+	public LocalDate getDataFimVigencia() {
 		return dataFimVigencia;
 	}
-	public void setDataFimVigencia(Date dataFimVigencia) {
+	public void setDataFimVigencia(LocalDate dataFimVigencia) {
 		this.dataFimVigencia = dataFimVigencia;
 	}
+
 
 	
 	

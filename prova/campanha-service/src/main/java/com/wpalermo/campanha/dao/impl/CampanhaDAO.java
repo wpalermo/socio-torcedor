@@ -1,5 +1,7 @@
 package com.wpalermo.campanha.dao.impl;
 
+import java.util.LinkedList;
+
 import org.springframework.stereotype.Repository;
 
 import com.wpalermo.campanha.bean.Campanha;
@@ -26,8 +28,9 @@ public class CampanhaDAO implements ICampanhaDAO{
 
 	@Override
 	public void updateCampanha(Campanha campanha) throws CampanhaException {
-		// TODO Auto-generated method stub
+		CampanhaPersistence.getInstance();
 		
+		CampanhaPersistence.updateCampanha(campanha);
 	}
 
 	@Override
@@ -35,6 +38,12 @@ public class CampanhaDAO implements ICampanhaDAO{
 		CampanhaPersistence.getInstance();
 		
 		return CampanhaPersistence.readCampanha(campanhaId);	
+	}
+
+	@Override
+	public LinkedList<Campanha> getAll() {
+		CampanhaPersistence.getInstance();
+		return CampanhaPersistence.getAll();
 	}
 
 }

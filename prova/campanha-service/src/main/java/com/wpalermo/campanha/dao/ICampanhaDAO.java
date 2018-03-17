@@ -1,5 +1,7 @@
 package com.wpalermo.campanha.dao;
 
+import java.util.LinkedList;
+
 import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 
@@ -13,5 +15,7 @@ public interface ICampanhaDAO {
 	void updateCampanha(Campanha campanha) throws CampanhaException;
 	
 	Campanha readCampanha(Integer campanhaId) throws CampanhaException;
+	
+	LinkedList<Campanha> getAll();
 	
 }

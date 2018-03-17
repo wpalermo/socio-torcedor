@@ -1,11 +1,15 @@
 package com.wpalermo.campanha.service.impl;
 
+import java.time.LocalDate;
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.dao.ICampanhaDAO;
 import com.wpalermo.campanha.exception.CampanhaException;
+import com.wpalermo.campanha.exception.DataVigenciaException;
 import com.wpalermo.campanha.service.ICampanhaService;
 
 @Service
@@ -16,6 +20,15 @@ public class CampanhaService implements ICampanhaService {
 
 	@Override
 	public void createCampanha(Campanha campanha) throws CampanhaException {
+
+		if (!campanhaDAO.getAll().isEmpty())
+			while (true)
+				if (campanhaDAO.getAll().stream()
+						.anyMatch(c -> c.getDataFimVigencia().equals(campanha.getDataFimVigencia())))
+					campanha.setDataFimVigencia(campanha.getDataFimVigencia().plusDays(1));
+				else
+					break;
+
 		campanhaDAO.insertCampanha(campanha);
 	}
 
@@ -26,13 +39,17 @@ public class CampanhaService implements ICampanhaService {
 
 	@Override
 	public void updateCampanha(Campanha campanha) throws CampanhaException {
-		// TODO Auto-generated method stub
-
+		campanhaDAO.updateCampanha(campanha);
 	}
 
 	@Override
-	public Campanha readCampanha(Integer campanhaId) throws CampanhaException {
-		return campanhaDAO.readCampanha(campanhaId);
+	public Campanha readCampanha(Integer campanhaId) throws CampanhaException, DataVigenciaException {
+		Campanha c = campanhaDAO.readCampanha(campanhaId);
+
+		 if(c.getDataFimVigencia().isBefore(LocalDate.now()))
+			 throw new DataVigenciaException("Campanha com data vigencia vencida");
+
+		return c;
 	}
 
 }
