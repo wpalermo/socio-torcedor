@@ -24,7 +24,7 @@ import com.wpalermo.campanha.utils.MensagensEnum;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/crud")
+@RequestMapping("/campanha")
 public class CampanhaController {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());

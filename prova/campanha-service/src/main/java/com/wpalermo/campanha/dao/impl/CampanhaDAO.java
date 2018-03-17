@@ -49,6 +49,7 @@ public class CampanhaDAO implements ICampanhaDAO {
 		return CampanhaPersistence.getAll();
 	}
 
+	@Override
 	public ArrayList<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
 		return (ArrayList<Campanha>) this.getAll().stream()
 				.filter(camp -> camp.getIdTimeCoracao() == idTimeCoracao).collect(Collectors.toList());
