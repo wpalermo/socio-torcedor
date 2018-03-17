@@ -1,7 +1,7 @@
 package com.wpalermo.campanha.service.impl;
 
 import java.time.LocalDate;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +50,12 @@ public class CampanhaService implements ICampanhaService {
 			 throw new DataVigenciaException("Campanha com data vigencia vencida");
 
 		return c;
+	}
+
+	@Override
+	public ArrayList<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
+		return  campanhaDAO.buscaPorTime(idTimeCoracao);
+	
 	}
 
 }
