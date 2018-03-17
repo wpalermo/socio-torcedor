@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wpalermo.socioTorcedor.bean.SocioTorcedor;
+import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 
@@ -25,7 +26,7 @@ public class SocioTorcedorController {
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public void cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException {
+	public void cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
 		
 		socioTorcedorService.cadastrarSocioTorcedor(socioTorcedor);
 		
