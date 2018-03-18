@@ -10,9 +10,16 @@ import java.util.List;
 public class App {
 	public static void main(String[] args) {
 		
-		Stream s = new Stream("aAbBABacafe");
+		Stream s = new Stream("uAbBABoovcafe");
 		
-		firstChar(s);
+		char returned = firstChar(s);
+		
+		if(returned == 0)
+			System.out.println("Nenhum caracter encontrado");
+		else
+			System.out.println(returned);
+		
+		
 		
 	}
 
@@ -20,7 +27,6 @@ public class App {
 		
 		boolean foiVogal = false;
 		boolean foiCons = false;
-		int contador = 0;
 		List<Character> charList = new ArrayList<Character>();
 		String auxx = "";
 		
@@ -59,20 +65,21 @@ public class App {
 		
 		
 		int repetidos = 0;
-		Character returnable = null;
+		Character returnable = 0;
 		for(Character c : charList) {
 			returnable = c;
 			for(char auxC : auxx.toCharArray()) {
 				if(c == auxC)
 					repetidos++;
 				if(repetidos > 1) {
-					returnable = null;
+					returnable = 0;
 					repetidos = 0;
 					break;
 				}
 					
 			}
-			
+			if(repetidos == 1 )
+				break;
 					
 		}
 		
