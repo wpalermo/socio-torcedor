@@ -23,4 +23,10 @@ public class SocioTorcedorDAO implements ISocioTorcedorDAO{
 		return SocioPersistence.readSocio(email);
 	}
 
+	@Override
+	public void updateSocioTorcedor(SocioTorcedor socio) throws PersistenceException {
+		SocioPersistence.getInstance();
+		SocioPersistence.updateSocio(socio);
+	}
+
 }

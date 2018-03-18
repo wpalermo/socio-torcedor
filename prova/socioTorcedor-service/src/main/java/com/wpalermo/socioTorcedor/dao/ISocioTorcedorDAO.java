@@ -8,5 +8,7 @@ public interface ISocioTorcedorDAO {
 	void cadastrarSocioTorcedor(SocioTorcedor socio) throws PersistenceException;
 	
 	SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException;
+	
+	void updateSocioTorcedor(SocioTorcedor socio) throws PersistenceException;
 
 }

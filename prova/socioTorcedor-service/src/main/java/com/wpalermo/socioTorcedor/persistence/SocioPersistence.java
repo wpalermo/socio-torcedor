@@ -30,10 +30,12 @@ public class SocioPersistence {
 		if (socio.getEmail() != null) {
 			try {
 				SocioTorcedor s = socios.stream().filter(st -> st.getEmail().equals(socio.getEmail()))
-						.findFirst().orElseGet(null);
+						.findFirst().orElse(null);
 				if (s != null)
 					throw new PersistenceException(
 							"Nao foi possivel adicionar - Email ja exitente " + s.getEmail(), PersistenceDatailEnum.EMAIL_EXISTENTE);
+				else
+					socios.add(socio);
 
 			} catch (IndexOutOfBoundsException e) {
 				socios.add(socio);
@@ -93,5 +95,7 @@ public class SocioPersistence {
 	public static LinkedList<SocioTorcedor> getAll(){
 		return socios;
 	}
+	
+
 
 }
