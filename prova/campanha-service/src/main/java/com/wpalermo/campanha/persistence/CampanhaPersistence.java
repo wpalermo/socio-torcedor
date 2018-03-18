@@ -5,6 +5,12 @@ import java.util.LinkedList;
 import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 
+
+/**
+ * Classe de persistencia simula um banco de dados em memoria. 
+ * @author paler
+ *
+ */
 public class CampanhaPersistence {
 
 	private static LinkedList<Campanha> campanhas;
