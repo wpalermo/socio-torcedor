@@ -19,6 +19,7 @@ import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.exception.DataVigenciaException;
 import com.wpalermo.campanha.response.CampanhaResponse;
+import com.wpalermo.campanha.response.ListaCampanhaResponse;
 import com.wpalermo.campanha.service.ICampanhaService;
 import com.wpalermo.campanha.utils.MensagensEnum;
 
@@ -102,9 +103,14 @@ public class CampanhaController {
 	@RequestMapping(value = "/buscaPorTime", method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ArrayList<Campanha> buscaPorTime(@RequestParam Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
+	public ListaCampanhaResponse buscaPorTime(@RequestParam Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
+		
+			
 			ArrayList<Campanha> campanhas = campanhaService.buscaPorTime(idTimeCoracao);
-			return campanhas;
+			ListaCampanhaResponse response = new ListaCampanhaResponse();
+			response.setCampanhas(campanhas);
+			
+			return response;
 	}
 
 }
