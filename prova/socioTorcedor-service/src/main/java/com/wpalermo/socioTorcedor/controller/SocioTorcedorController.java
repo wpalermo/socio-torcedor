@@ -16,6 +16,7 @@ import com.wpalermo.socioTorcedor.bean.Campanha;
 import com.wpalermo.socioTorcedor.bean.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
+import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 
 @RestController
@@ -30,10 +31,10 @@ public class SocioTorcedorController {
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public List<Campanha> cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
+	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
+		
 		
 		return socioTorcedorService.cadastrarSocioTorcedor(socioTorcedor);
-		
 	}
 	
 }
