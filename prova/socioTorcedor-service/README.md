@@ -2,11 +2,10 @@
 
 ## Expor um serviço de Sócio Torcedor seguindo a especificação abaixo 
 
-	Eu, como usuário, quero me cadastrar através de uma API que me permite participar de algumas
-	campanhas. Para tanto, os critérios de aceite dessa história são:
+Eu, como usuário, quero me cadastrar através de uma API que me permite participar de algumas ampanhas. 
 
-	Dado um E-mail que já existe, informar que o cadastro já foi efetuado, porém, caso o cliente não tenha nenhuma campanha associada, o serviço deverá enviar as novas campanhas como resposta;
-	
+Para tanto, os critérios de aceite dessa história são:
+Dado um E-mail que já existe, informar que o cadastro já foi efetuado, porém, caso o cliente não tenha nenhuma campanha associada, o serviço deverá enviar as novas campanhas como resposta;
 	
 O Cadastro deve ser composto de:
 ```
