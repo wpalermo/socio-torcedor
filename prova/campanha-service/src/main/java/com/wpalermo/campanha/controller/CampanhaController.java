@@ -1,5 +1,7 @@
 package com.wpalermo.campanha.controller;
 
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ import com.wpalermo.campanha.utils.MensagensEnum;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/crud")
+@RequestMapping("/campanha")
 public class CampanhaController {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -94,6 +96,15 @@ public class CampanhaController {
 			response.setErro(e.getLocalizedMessage());
 			return response;
 		}
+	}
+	
+	
+	@RequestMapping(value = "/buscaPorTime", method = RequestMethod.GET)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public ArrayList<Campanha> buscaPorTime(@RequestParam Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
+			ArrayList<Campanha> campanhas = campanhaService.buscaPorTime(idTimeCoracao);
+			return campanhas;
 	}
 
 }
