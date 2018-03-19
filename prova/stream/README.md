@@ -15,7 +15,9 @@ Input:  aAbBABacafe
 Output: e
 No exemplo, ‘e’ é o primeiro caractere Vogal da stream que não se repete após a primeira
 Consoante ‘f’o qual tem uma vogal ‘a’ como antecessora.
+
 Segue o exemplo da interface em Java:
+
 public interface Stream{
     public char getNext();
 
