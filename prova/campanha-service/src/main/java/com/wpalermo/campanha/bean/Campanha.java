@@ -2,10 +2,13 @@ package com.wpalermo.campanha.bean;
 
 import java.time.LocalDate;
 
+import org.springframework.data.annotation.Id;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Campanha {
 	
+	@Id
 	private Integer idCampanha;
 	private String nomeCampanha;
 	private Integer idTimeCoracao;
