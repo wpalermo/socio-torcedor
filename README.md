@@ -24,6 +24,5 @@ Para evitar um deadlock podemos "reservar" todos os recursos que a aplicação i
 
 O stream e o parallelStream fazem a mesma coisa do mesmo jeito para quem está escrevendo o codigo. 
 A grande diferenca entre eles é que o stream é sigle-thread e o parallelStream "espalha" o processamento daquela lista para todos os processadores disponiveis executando a operação em paralelo. 
- 
- 
+  
 Devemos utilizar o parallelStream stream quando temos que lidar com listas muito pesadas, com grande quantidade de dados. E o stream pode ser usado como substituto do tradicional for. 
