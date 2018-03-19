@@ -3,6 +3,7 @@ package com.wpalermo.campanha.service.impl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,19 +16,24 @@ import com.wpalermo.campanha.service.ICampanhaService;
 @Service
 public class CampanhaService implements ICampanhaService {
 
+	private Logger logger = Logger.getLogger(this.getClass());
+	
 	@Autowired
 	private ICampanhaDAO campanhaDAO;
 
 	@Override
 	public void createCampanha(Campanha campanha) throws CampanhaException {
 
-		if (!campanhaDAO.getAll().isEmpty())
+		
+		if (!campanhaDAO.getAll().isEmpty()) {
+			logger.info("Iniciando verificacao de data de vigencia");
 			while (true)
 				if (campanhaDAO.getAll().stream()
 						.anyMatch(c -> c.getDataFimVigencia().equals(campanha.getDataFimVigencia())))
 					campanha.setDataFimVigencia(campanha.getDataFimVigencia().plusDays(1));
 				else
 					break;
+		}
 
 		campanhaDAO.insertCampanha(campanha);
 	}
@@ -38,7 +44,7 @@ public class CampanhaService implements ICampanhaService {
 	}
 
 	@Override
-	public void updateCampanha(Campanha campanha) throws CampanhaException {
+	public void updateCampanha(Campanha campanha)  throws CampanhaException {
 		campanhaDAO.updateCampanha(campanha);
 	}
 
