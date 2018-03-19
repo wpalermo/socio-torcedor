@@ -39,13 +39,17 @@ public class CampanhaController {
 	public CampanhaResponse create(@RequestBody Campanha campanha) {
 
 		try {
+			logger.info("Iniciando cadastro de campanha");
 			campanhaService.createCampanha(campanha);
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.SUCESSO.mensagem);
 
+			
+			logger.info("Campanha cadastrada com sucesso");
 			return response;
 		} catch (CampanhaException e) {
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.ERRO.mensagem);
 			response.setErro(e.getLocalizedMessage());
+			logger.error("Problema ao cadastrar campanha : " + e.getMessage());
 			return response;
 		}
 	}
@@ -55,13 +59,19 @@ public class CampanhaController {
 	@ResponseBody
 	public CampanhaResponse update(@RequestBody Campanha campanha) throws CampanhaException {
 		try {
+			logger.info("Iniciando atualizacao de campanha");
+
 			campanhaService.updateCampanha(campanha);
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.SUCESSO.mensagem);
+
+			logger.info("Campanha atualizada com sucesso - ID:" + campanha.getIdCampanha());
 
 			return response;
 		} catch (CampanhaException e) {
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.ERRO.mensagem);
 			response.setErro(e.getLocalizedMessage());
+			
+			logger.error("Problema ao realizar update " + campanha.getIdCampanha());
 			return response;
 		}
 	}
@@ -72,13 +82,19 @@ public class CampanhaController {
 	public CampanhaResponse read(@RequestParam Integer campanhaId) throws CampanhaException {
 		
 		try {
+			
 			Campanha campanha = campanhaService.readCampanha(campanhaId);
 			CampanhaResponse response = new CampanhaResponse(campanha, MensagensEnum.SUCESSO.mensagem);
 
+			
+			logger.info("Busca realizada com sucesso. Campanha encontrada: " + campanha.getNomeCampanha());
 			return response;
 		} catch (CampanhaException | DataVigenciaException e) {
 			CampanhaResponse response = new CampanhaResponse(null, MensagensEnum.ERRO.mensagem);
 			response.setErro(e.getLocalizedMessage());
+			
+			logger.error("Erro ao buscar campanha " + e.getMessage());
+
 			return response;
 		}
 	}
@@ -105,10 +121,12 @@ public class CampanhaController {
 	@ResponseBody
 	public ListaCampanhaResponse buscaPorTime(@RequestParam Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
 		
-			
+			logger.info("Iniciando busca de campanha por time do coracao");
+
 			ArrayList<Campanha> campanhas = campanhaService.buscaPorTime(idTimeCoracao);
 			ListaCampanhaResponse response = new ListaCampanhaResponse();
 			response.setCampanhas(campanhas);
+			
 			
 			return response;
 	}
