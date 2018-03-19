@@ -1,6 +1,7 @@
 package com.wpalermo.campanha.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
@@ -46,7 +47,7 @@ public interface ICampanhaService {
 	 * @throws CampanhaException
 	 * @throws DataVigenciaException
 	 */
-	ArrayList<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException;
+	List<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException;
 	
 
 }

@@ -2,6 +2,8 @@ package com.wpalermo.campanha.service.impl;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +61,13 @@ public class CampanhaService implements ICampanhaService {
 	}
 
 	@Override
-	public ArrayList<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
-		return  campanhaDAO.buscaPorTime(idTimeCoracao);
+	public List<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException {
+		
+		ArrayList<Campanha> todasCampanhas = campanhaDAO.buscaPorTime(idTimeCoracao);
+		
+		List<Campanha> campanhasPorData = todasCampanhas.stream().filter(camp -> camp.getDataFimVigencia().isAfter(LocalDate.now())).collect(Collectors.toList());
+		
+		return  campanhasPorData;
 	
 	}
 

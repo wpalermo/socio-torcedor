@@ -38,22 +38,22 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		try {
 				socioTorcedorDAO.cadastrarSocioTorcedor(socioTorcedor);
 	
-				logger.info("URL: " + restServers.getCampanhaUrl() + "/campanha/buscaPorItme?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao());
+				logger.info("Iniciando chamada de servico de campanha - URL: " + restServers.getCampanhaUrl() + "/campanha/buscaPorItme?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao());
 				
 				try {
-	
+					//Chamada de servico
 					RestTemplate restTemplate = new RestTemplate();
 					ListaCampanhaResponse response = restTemplate.getForObject(restServers.getCampanhaUrl() + "/campanha/buscaPorTime?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao(),
 							ListaCampanhaResponse.class);
 		
-					List<Campanha> listCampanhas = response.getCampanhas();
-					logger.info(listCampanhas.get(0));
-		
+					//Associa as campanhas
 					socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
 		
 					socioTorcedorDAO.updateSocioTorcedor(socioTorcedor);
 					
+					//gera a response
 					CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
+					cadastrarSocioTorcedorResponse.setCampanhas(socioTorcedor.getTimeCoracao().getCampanhasAssociadas());
 					cadastrarSocioTorcedorResponse.setMessage("Usuario cadastrado com sucesso - email  " + socioTorcedor.getEmail());
 					
 					
@@ -98,6 +98,8 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 					cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
 					cadastrarSocioTorcedorResponse.setMessage("Campanhas atualizadas para o email  " + socioEncontrado.getEmail());
 					socioTorcedorDAO.updateSocioTorcedor(socioEncontrado);
+					
+					return cadastrarSocioTorcedorResponse;
 
 				}
 			} catch (ResourceAccessException rae) {

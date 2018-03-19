@@ -1,6 +1,6 @@
 package com.wpalermo.campanha.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -123,7 +123,7 @@ public class CampanhaController {
 		
 			logger.info("Iniciando busca de campanha por time do coracao");
 
-			ArrayList<Campanha> campanhas = campanhaService.buscaPorTime(idTimeCoracao);
+			List<Campanha> campanhas = campanhaService.buscaPorTime(idTimeCoracao);
 			ListaCampanhaResponse response = new ListaCampanhaResponse();
 			response.setCampanhas(campanhas);
 			
