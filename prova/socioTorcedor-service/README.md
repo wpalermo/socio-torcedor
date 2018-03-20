@@ -15,6 +15,16 @@ O Cadastro deve ser composto de:
 - Meu Time do Coração;
 ```
 
+Os caminhos dos servicos são
+```
+/campanha/read 
+/campanha/create
+/campanha/update
+/campanha/delete
+/campanha/buscaPorTime
+/campanha/popularCampanhas 
+```
+
 * O Cliente não pode ter mais de um cadastro ativo;
 
 * Ao efetuar o cadastro do usuário, utilize os serviços criados anteriormente para efetuar as operações e as associações necessárias:
