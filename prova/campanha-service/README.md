@@ -11,6 +11,18 @@ As campanhas deverão ser cadastradas de forma que o serviço retorne essas camp
 * ID do Time do Coração;
 * Data de Vigência;
 
+
+Os caminhos dos servicos são:
+```
+/campanha/read 
+/campanha/create
+/campanha/update
+/campanha/delete
+/campanha/buscaPorTime
+/campanha/popularCampanhas 
+```
+
+
 O Sistema não deverá retornar campanhas que estão com a data de vigência vencidas;
 
 No cadastramento de uma nova campanha, deve-se verificar se já existe uma campanha ativa para aquele período (vigência), caso exista uma campanha ou N campanhas associadas naquele período, o sistema deverá somar um dia no término da vigência de cada campanha já existente. 

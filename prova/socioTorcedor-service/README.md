@@ -15,6 +15,11 @@ O Cadastro deve ser composto de:
 - Meu Time do Coração;
 ```
 
+Os caminhos dos servicos são:
+```
+/socioTorcedor/cadastrar
+```
+
 * O Cliente não pode ter mais de um cadastro ativo;
 
 * Ao efetuar o cadastro do usuário, utilize os serviços criados anteriormente para efetuar as operações e as associações necessárias:
