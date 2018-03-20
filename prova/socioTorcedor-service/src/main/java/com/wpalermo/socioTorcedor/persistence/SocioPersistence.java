@@ -83,8 +83,12 @@ public class SocioPersistence {
 	public static SocioTorcedor readSocio(String email) throws PersistenceException {
 
 		if (email != null) {
-			return socios.stream().filter(st -> st.getEmail().equals(email)).findFirst()
+			SocioTorcedor s = socios.stream().filter(st -> st.getEmail().equals(email)).findFirst()
 					.orElse(null);
+			if(s == null)
+				throw new PersistenceException("Email nao encontrado - Email: " + email);
+			
+			return s;
 
 		} else
 			throw new PersistenceException("Email nao encontrado - Email: " + email);
