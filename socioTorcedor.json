@@ -1,0 +1,9 @@
+{
+	"nome": "William",
+	"email": "palermow@gmail.com",
+	"timeCoracao" : {
+		"idTimeCoracao" : "1",
+		"nomeTimeCoracao" : "Sao Paulo",
+		"campanhasAssociadas" : []
+	}
+}

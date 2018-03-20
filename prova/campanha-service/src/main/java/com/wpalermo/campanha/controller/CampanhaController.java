@@ -130,5 +130,23 @@ public class CampanhaController {
 			
 			return response;
 	}
+	
+	@RequestMapping(value = "/popularCampanhas", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public void buscaPorTime(@RequestBody List<Campanha> campanhas) throws CampanhaException, DataVigenciaException {
+		
+			logger.info("Iniciando busca de campanha por time do coracao");
+
+			campanhas.stream().forEach(c -> {
+				try {
+					campanhaService.createCampanha(c);
+				} catch (CampanhaException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			
+	}
 
 }

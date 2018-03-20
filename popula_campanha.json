@@ -1,0 +1,44 @@
+[
+	{
+	  "nomeCampanha" : "Campanha 1",
+	  "idTimeCoracao" : "1",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 2",
+	  "idTimeCoracao" : "1",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 3",
+	  "idTimeCoracao" : "2",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 4",
+	  "idTimeCoracao" : "2",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 5",
+	  "idTimeCoracao" : "5",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 6",
+	  "idTimeCoracao" : "3",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	},
+	{
+	  "nomeCampanha" : "Campanha 7",
+	  "idTimeCoracao" : "2",
+	  "dataInicioVigencia": "01/10/2017",
+	  "dataFimVigencia": "16/07/2018" 
+	}
+];

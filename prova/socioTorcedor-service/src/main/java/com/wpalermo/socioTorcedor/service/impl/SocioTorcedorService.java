@@ -109,5 +109,10 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		}
 		return null;
 	}
+	
+	@Override
+	public SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException {
+		return socioTorcedorDAO.buscarSocioTorcedor(email);
+	}
 
 }

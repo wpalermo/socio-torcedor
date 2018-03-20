@@ -54,6 +54,10 @@ public class CampanhaService implements ICampanhaService {
 	public Campanha readCampanha(Integer campanhaId) throws CampanhaException, DataVigenciaException {
 		Campanha c = campanhaDAO.readCampanha(campanhaId);
 
+		
+		if(c == null)
+			throw new CampanhaException("Campanha nao encontrada - ID: " + campanhaId);
+		
 		 if(c.getDataFimVigencia().isBefore(LocalDate.now()))
 			 throw new DataVigenciaException("Campanha com data vigencia vencida");
 
