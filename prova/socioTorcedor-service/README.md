@@ -15,14 +15,9 @@ O Cadastro deve ser composto de:
 - Meu Time do Coração;
 ```
 
-Os caminhos dos servicos são
+Os caminhos dos servicos são:
 ```
-/campanha/read 
-/campanha/create
-/campanha/update
-/campanha/delete
-/campanha/buscaPorTime
-/campanha/popularCampanhas 
+/socioTorcedor/cadastrar
 ```
 
 * O Cliente não pode ter mais de um cadastro ativo;
