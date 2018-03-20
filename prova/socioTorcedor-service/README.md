@@ -18,6 +18,7 @@ O Cadastro deve ser composto de:
 Os caminhos dos servicos são:
 ```
 /socioTorcedor/cadastrar
+/socioTorcedor/buscar
 ```
 
 * O Cliente não pode ter mais de um cadastro ativo;
