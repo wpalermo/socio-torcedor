@@ -46,13 +46,14 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> put() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	
+	
 	@Override
 	@RequestMapping(method = RequestMethod.DELETE)
-	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseStatus(value = HttpStatus.OK)
 	@ExceptionHandler(CampanhaException.class)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> post(RequestEntity<CampanhaRequest> request) {
@@ -64,7 +65,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		
 		
 		if(resource.getCampanha().size() > 1)
-			logger.info("implementar metodo para receber lista");
+			throw new CampanhaException("Nenhum registro encontrado");
 		else if(resource.getCampanha().size() == 1)
 			campanhaService.createCampanha(resource.getCampanha().get(0));
 		
