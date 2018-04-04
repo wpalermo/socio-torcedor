@@ -1,5 +1,9 @@
 package com.wpalermo.campanha.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.EXPECTATION_FAILED, reason="Falha na conversao de datas" )
 public class DataVigenciaException extends Exception {
 
 	private static final long serialVersionUID = 1L;

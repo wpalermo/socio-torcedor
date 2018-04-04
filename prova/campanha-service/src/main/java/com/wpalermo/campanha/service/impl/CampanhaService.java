@@ -75,4 +75,10 @@ public class CampanhaService implements ICampanhaService {
 	
 	}
 
+	@Override
+	public List<Campanha> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

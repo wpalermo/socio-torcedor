@@ -48,5 +48,7 @@ public interface ICampanhaService {
 	 */
 	List<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException;
 	
+	List<Campanha> getAll();
+	
 
 }
