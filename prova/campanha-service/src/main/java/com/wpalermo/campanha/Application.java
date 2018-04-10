@@ -7,12 +7,23 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+
+@PropertySource(value="file:./application.properties")
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+    
+    @Bean 
+    public MongoClient mongoClient() {
+    	MongoClientURI uri = new MongoClientURI("mongodb+srv://testejava:1234@cluster0-ibm-hogza.mongodb.net/test");
+        return new MongoClient(uri);
     }
 
     @Bean

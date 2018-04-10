@@ -71,4 +71,14 @@ public class CampanhaService implements ICampanhaService {
 	
 	}
 
+	@Override
+	public Campanha readCampanhaMongo(Integer id) {
+		return campanhaDAO.readCampanhaMongo(id);
+	}
+
+	@Override
+	public void insertCampanhaMongo(Campanha campanha) {
+		campanhaDAO.insertCampanhaMongo(campanha);
+	}
+
 }

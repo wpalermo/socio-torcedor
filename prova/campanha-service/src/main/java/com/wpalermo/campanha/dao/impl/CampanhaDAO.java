@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.wpalermo.campanha.bean.Campanha;
@@ -18,7 +19,7 @@ import com.wpalermo.campanha.persistence.CampanhaPersistence;
 public class CampanhaDAO implements ICampanhaDAO {
 	
 	@Autowired
-	private CamapnhaMongoRepository mongoRepository;
+	private CamapnhaMongoRepository mongo;
 
 	@Override
 	public void insertCampanha(Campanha campanha) throws CampanhaException {
@@ -60,7 +61,15 @@ public class CampanhaDAO implements ICampanhaDAO {
 				.filter(camp -> camp.getIdTimeCoracao() == idTimeCoracao).collect(Collectors.toList());
 	}
 	
-	public Campanha readCampanhaMongo(Integer idCampanha){
+	@Override
+	public Campanha readCampanhaMongo(Integer id){
 		
+		return mongo.findById(id).get();
 	}
+
+	@Override
+	public void insertCampanhaMongo(Campanha campanha) {
+		mongo.save(campanha);
+	}
+	
 }

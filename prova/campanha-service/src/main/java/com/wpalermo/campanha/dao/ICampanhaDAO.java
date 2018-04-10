@@ -56,5 +56,10 @@ public interface ICampanhaDAO {
 	 * @throws DataVigenciaException
 	 */
 	ArrayList<Campanha> buscaPorTime(Integer idTimeCoracao) throws CampanhaException, DataVigenciaException;
+
+
+	Campanha readCampanhaMongo(Integer id);
+	
+	void insertCampanhaMongo(Campanha campanha);
 	
 }

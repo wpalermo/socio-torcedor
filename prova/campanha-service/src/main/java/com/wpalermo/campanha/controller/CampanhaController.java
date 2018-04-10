@@ -130,5 +130,13 @@ public class CampanhaController {
 			
 			return response;
 	}
+	
+	@RequestMapping(value = "/testMongo", method = RequestMethod.POST)
+	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseBody
+	public Object testMongo(@RequestBody Campanha campanha) throws CampanhaException, DataVigenciaException {
+		campanhaService.insertCampanhaMongo(campanha);
+		return campanhaService.readCampanhaMongo(campanha.getIdCampanha());
+	}
 
 }
