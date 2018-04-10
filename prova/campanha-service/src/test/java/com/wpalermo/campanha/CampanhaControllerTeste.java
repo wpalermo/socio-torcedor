@@ -30,10 +30,7 @@ public class CampanhaControllerTeste {
 	@Test
 	public void testGet() {
 		
-		
-		
 		ResponseEntity<CampanhaResponse> response = restTemplate.getForEntity(BASE_PATH, CampanhaResponse.class);
-		
 		Assert.assertEquals("Testes ok", response.getBody().getMessage());
 		
 	}
