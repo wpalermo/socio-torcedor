@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Repository;
 
-import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.dao.ICampanhaDAO;
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.exception.DataVigenciaException;
 import com.wpalermo.campanha.persistence.CampanhaPersistence;

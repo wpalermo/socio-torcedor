@@ -2,7 +2,7 @@ package com.wpalermo.campanha.persistence;
 
 import java.util.LinkedList;
 
-import com.wpalermo.campanha.bean.Campanha;
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 
 

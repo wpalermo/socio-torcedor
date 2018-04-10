@@ -3,7 +3,7 @@ package com.wpalermo.campanha.dao;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import com.wpalermo.campanha.bean.Campanha;
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.exception.DataVigenciaException;
 

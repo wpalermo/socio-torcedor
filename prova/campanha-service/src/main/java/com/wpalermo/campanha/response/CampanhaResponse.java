@@ -3,7 +3,7 @@ package com.wpalermo.campanha.response;
 import java.io.Serializable;
 import java.util.List;
 
-import com.wpalermo.campanha.bean.Campanha;
+import com.wpalermo.campanha.entities.Campanha;
 
 public class CampanhaResponse implements Serializable{
 

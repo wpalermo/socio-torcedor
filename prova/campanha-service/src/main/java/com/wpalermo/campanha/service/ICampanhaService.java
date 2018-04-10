@@ -2,7 +2,7 @@ package com.wpalermo.campanha.service;
 
 import java.util.List;
 
-import com.wpalermo.campanha.bean.Campanha;
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.exception.DataVigenciaException;
 

@@ -1,23 +1,34 @@
-package com.wpalermo.campanha.bean;
+package com.wpalermo.campanha.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 public class Campanha {
 	
+	@Id
+	@GeneratedValue
 	private Integer idCampanha;
+	
+	@Column
 	private String nomeCampanha;
+	
+	@Column
 	private Integer idTimeCoracao;
 	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataInicioVigencia;
 	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataFimVigencia;
-	
-	
-	
 	
 
 	public Integer getIdCampanha() {

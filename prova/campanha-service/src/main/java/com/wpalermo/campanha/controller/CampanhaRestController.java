@@ -39,6 +39,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		CampanhaResponse campanha = new CampanhaResponse();
 		campanha.setMessage("Testes ok");
 		
+		campanhaService.getAll();
 		
 		//throw new CampanhaException("Eita");
 		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);

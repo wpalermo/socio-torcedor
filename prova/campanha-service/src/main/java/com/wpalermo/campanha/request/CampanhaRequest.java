@@ -2,7 +2,7 @@ package com.wpalermo.campanha.request;
 
 import java.util.List;
 
-import com.wpalermo.campanha.bean.Campanha;
+import com.wpalermo.campanha.entities.Campanha;
 
 public class CampanhaRequest {
 	

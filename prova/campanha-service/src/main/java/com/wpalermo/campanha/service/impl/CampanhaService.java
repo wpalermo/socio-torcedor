@@ -5,14 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.assertj.core.util.Lists;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wpalermo.campanha.bean.Campanha;
 import com.wpalermo.campanha.dao.ICampanhaDAO;
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.exception.DataVigenciaException;
+import com.wpalermo.campanha.repository.CampanhaRepository;
 import com.wpalermo.campanha.service.ICampanhaService;
 
 @Service
@@ -22,6 +24,9 @@ public class CampanhaService implements ICampanhaService {
 	
 	@Autowired
 	private ICampanhaDAO campanhaDAO;
+	
+	@Autowired
+	private CampanhaRepository campanhaRepository;
 
 	@Override
 	public void createCampanha(Campanha campanha) throws CampanhaException {
@@ -77,8 +82,7 @@ public class CampanhaService implements ICampanhaService {
 
 	@Override
 	public List<Campanha> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return Lists.newArrayList(campanhaRepository.findAll());
 	}
 
 }
