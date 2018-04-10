@@ -1,4 +1,4 @@
-package com.wpalermo;
+package com.wpalermo.campanha;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
