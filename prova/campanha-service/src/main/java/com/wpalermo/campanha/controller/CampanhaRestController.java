@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.wpalermo.campanha.exception.CampanhaException;
 import com.wpalermo.campanha.request.CampanhaRequest;
@@ -20,7 +20,7 @@ import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ICampanhaService;
 
 
-@RestController
+@Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/campanha")
 public class CampanhaRestController implements RestResource<CampanhaResponse, CampanhaRequest> {
@@ -34,15 +34,20 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<CampanhaResponse> get() {
+	public ResponseEntity<CampanhaResponse> get()  {
 		
-		return new ResponseEntity<CampanhaResponse>(new CampanhaResponse(campanhaService.getAll()), HttpStatus.OK);
+		CampanhaResponse campanha = new CampanhaResponse();
+		campanha.setMessage("Testes ok");
+		
+		
+		throw new CampanhaException("Eita");
+		//return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
 		 
 	}
 
 
 	@Override
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.PUT)
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> put() {
@@ -52,9 +57,8 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	
 	
 	@Override
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
-	@ExceptionHandler(CampanhaException.class)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> post(RequestEntity<CampanhaRequest> request) {
 		
@@ -64,10 +68,10 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 			return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
 		
 		
-		if(resource.getCampanha().size() > 1)
-			throw new CampanhaException("Nenhum registro encontrado");
-		else if(resource.getCampanha().size() == 1)
-			campanhaService.createCampanha(resource.getCampanha().get(0));
+//		if(resource.getCampanha().size() > 1)
+//			throw new CampanhaException("Nenhum registro encontrado");
+//		else if(resource.getCampanha().size() == 1)
+//			campanhaService.createCampanha(resource.getCampanha().get(0));
 		
 		return null;
 

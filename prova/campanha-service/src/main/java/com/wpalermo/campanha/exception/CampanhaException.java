@@ -1,9 +1,5 @@
 package com.wpalermo.campanha.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.EXPECTATION_FAILED, reason="Falha no servico de campanha" )
 public class CampanhaException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
@@ -14,7 +10,6 @@ public class CampanhaException extends RuntimeException{
 	
 	public CampanhaException() {
 		super();
-		
 	}
 	
 	public CampanhaException(String message, Throwable cause) {
