@@ -40,18 +40,16 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		
 		campanha.setCampanhas(campanhaService.getAll());
 		
-		
-		//throw new CampanhaException("Eita");
 		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
 		 
 	}
 
 
 	@Override
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	@ResponseBody
-	public ResponseEntity<CampanhaResponse> put() {
+	public ResponseEntity<CampanhaResponse> put(RequestEntity<CampanhaRequest> request) {
 		return null;
 	}
 
@@ -75,18 +73,14 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 			campanhaService.createCampanha(resource.getCampanha().get(0));
 		
 		return null;
-
-		
-		
 		
 	}
 
 	@Override
-	@RequestMapping(method = RequestMethod.DELETE)
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
 	@ResponseBody
 	public void delete(RequestEntity<CampanhaRequest> request) {
-		// TODO Auto-generated method stub
 		
 	}
 

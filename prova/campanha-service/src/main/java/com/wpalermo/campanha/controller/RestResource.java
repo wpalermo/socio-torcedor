@@ -8,7 +8,7 @@ public interface RestResource<T, K> {
 	
 	ResponseEntity<T> get() ;
 	
-	ResponseEntity<T> put();
+	ResponseEntity<T> put(RequestEntity<K> request);
 	
 	ResponseEntity<T> post(RequestEntity<K> request) ;
 	
