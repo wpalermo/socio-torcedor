@@ -39,7 +39,8 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		CampanhaResponse campanha = new CampanhaResponse();
 		campanha.setMessage("Testes ok");
 		
-		campanhaService.getAll();
+		campanha.setCampanhas(campanhaService.getAll());
+		
 		
 		//throw new CampanhaException("Eita");
 		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
@@ -69,10 +70,10 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 			return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
 		
 		
-//		if(resource.getCampanha().size() > 1)
-//			throw new CampanhaException("Nenhum registro encontrado");
-//		else if(resource.getCampanha().size() == 1)
-//			campanhaService.createCampanha(resource.getCampanha().get(0));
+		if(resource.getCampanha().size() > 1)
+			throw new CampanhaException("Nenhum registro encontrado");
+		else if(resource.getCampanha().size() == 1)
+			campanhaService.createCampanha(resource.getCampanha().get(0));
 		
 		return null;
 

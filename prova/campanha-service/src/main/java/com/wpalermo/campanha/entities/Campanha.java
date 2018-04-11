@@ -30,13 +30,17 @@ public class Campanha {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataFimVigencia;
 	
+	
+	public Campanha() {
+		
+	}
 
-	public Integer getIdCampanha() {
-		return idCampanha;
-	}
-	public void setIdCampanha(Integer idCampanha) {
-		this.idCampanha = idCampanha;
-	}
+//	public Integer getIdCampanha() {
+//		return idCampanha;
+//	}
+//	public void setIdCampanha(Integer idCampanha) {
+//		this.idCampanha = idCampanha;
+//	}
 	public Integer getIdTimeCoracao() {
 		return idTimeCoracao;
 	}
