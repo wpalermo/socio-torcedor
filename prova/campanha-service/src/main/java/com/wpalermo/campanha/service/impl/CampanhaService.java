@@ -31,10 +31,14 @@ public class CampanhaService implements ICampanhaService {
 
 	@Override
 	public void deleteCampanha(Integer campanhaId) throws CampanhaException {
+		logger.debug("Deleting id: " + campanhaId);
+		campanhaRepository.deleteById(campanhaId);;
 	}
 
 	@Override
-	public void updateCampanha(Campanha campanha)  throws CampanhaException {
+	public void updateCampanha(Integer id, Campanha campanha)  throws CampanhaException {
+	
+		campanhaRepository.update(id, campanha);
 	}
 
 	@Override

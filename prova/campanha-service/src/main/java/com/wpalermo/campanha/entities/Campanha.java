@@ -35,12 +35,12 @@ public class Campanha {
 		
 	}
 
-//	public Integer getIdCampanha() {
-//		return idCampanha;
-//	}
-//	public void setIdCampanha(Integer idCampanha) {
-//		this.idCampanha = idCampanha;
-//	}
+	public Integer getIdCampanha() {
+		return idCampanha;
+	}
+	public void setIdCampanha(Integer idCampanha) {
+		this.idCampanha = idCampanha;
+	}
 	public Integer getIdTimeCoracao() {
 		return idTimeCoracao;
 	}

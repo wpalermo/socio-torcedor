@@ -28,7 +28,7 @@ public interface ICampanhaService {
 	 * @param campanha
 	 * @throws CampanhaException
 	 */
-	void updateCampanha(Campanha campanha) throws CampanhaException;
+	void updateCampanha(Integer id, Campanha campanha) throws CampanhaException;
 	
 	/**
 	 * Busca uma campanha cadastrada pelo seu ID

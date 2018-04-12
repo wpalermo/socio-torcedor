@@ -40,10 +40,8 @@ public class CampanhaControllerTeste {
 	
 	@Test
 	public void testGet() {
-		
 		ResponseEntity<CampanhaResponse> response = restTemplate.getForEntity(BASE_PATH, CampanhaResponse.class);
 		Assert.assertEquals("Testes ok", response.getBody().getMessage());
-		
 	}
 	
 	@Test
@@ -59,18 +57,34 @@ public class CampanhaControllerTeste {
 		
 		List<Campanha> campanhas = new ArrayList<Campanha>();
 		campanhas.add(campanha);
-		campanhaRequest.setCampanha(campanhas);
+		campanhaRequest.setCampanhas(campanhas);
 		
 		
 		
 		RequestEntity<CampanhaRequest> request = new RequestEntity<CampanhaRequest>(campanhaRequest, HttpMethod.POST, new URI(BASE_PATH));
-		
-		
 		ResponseEntity<CampanhaResponse> response = restTemplate.postForEntity(BASE_PATH, request, CampanhaResponse.class);
 		
-		//ResponseEntity<CampanhaResponse> responseGet = restTemplate.getForEntity(BASE_PATH, CampanhaResponse.class);
-		
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+		
+	}
+	
+	@Test
+	public void testPut() throws URISyntaxException{
+		
+		Integer id = 1;
+		
+		CampanhaRequest campanhaRequest = new CampanhaRequest();
+		Campanha campanha = new Campanha();
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(1);
+		campanha.setNomeCampanha("Teste PUT (UPDATE)");
+		
+		RequestEntity<CampanhaRequest> request = new RequestEntity<CampanhaRequest>(campanhaRequest, HttpMethod.PUT, new URI(BASE_PATH));
+		restTemplate.put(BASE_PATH + "//" + id, request);
+		
+		Assert.assertTrue(true);
 		
 	}
 	

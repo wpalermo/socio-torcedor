@@ -6,16 +6,24 @@ import com.wpalermo.campanha.entities.Campanha;
 
 public class CampanhaRequest {
 	
-	private List<Campanha> campanha;
+	
+	private Campanha campanha;
+	private List<Campanha> campanhas;
 
-	public List<Campanha> getCampanha() {
+	public Campanha getCampanha() {
 		return campanha;
 	}
-
-	public void setCampanha(List<Campanha> campanha) {
+	public void setCampanha(Campanha campanha) {
 		this.campanha = campanha;
 	}
-	
+	public List<Campanha> getCampanhas() {
+		return campanhas;
+	}
+	public void setCampanhas(List<Campanha> campanhas) {
+		this.campanhas = campanhas;
+	}
+
+
 	
 	
 
