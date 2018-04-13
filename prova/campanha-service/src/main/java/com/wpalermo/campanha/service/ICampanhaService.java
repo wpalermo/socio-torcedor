@@ -14,7 +14,11 @@ public interface ICampanhaService {
 	 * @param campanha
 	 * @throws CampanhaException
 	 */
-	void createCampanha(Campanha campanha) throws CampanhaException;
+	
+	void createCampanha(Campanha campanha);
+	
+	
+	void createCampanha(List<Campanha> campanha) throws CampanhaException;
 	
 	/**
 	 * delete uma campanha pelo seu ID

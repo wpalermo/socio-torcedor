@@ -24,9 +24,15 @@ public class CampanhaService implements ICampanhaService {
 	private CampanhaRepository campanhaRepository;
 
 	@Override
-	public void createCampanha(Campanha campanha)  {
-		logger.debug("Saving " + campanha.getNomeCampanha());
-		campanhaRepository.save(campanha);
+	public void createCampanha(List<Campanha> campanhas)  {
+		logger.debug("Saving " + campanhas.size());
+		campanhaRepository.saveAll(campanhas);
+		
+	}
+	
+	@Override
+	public void createCampanha(Campanha campanha) {
+		
 	}
 
 	@Override
@@ -51,6 +57,8 @@ public class CampanhaService implements ICampanhaService {
 	public List<Campanha> getAll() {
 		return Lists.newArrayList(campanhaRepository.findAll());
 	}
+
+
 
 
 

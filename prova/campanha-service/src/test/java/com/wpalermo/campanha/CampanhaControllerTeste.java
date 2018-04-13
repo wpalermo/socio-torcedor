@@ -34,14 +34,69 @@ public class CampanhaControllerTeste {
 	private RestTemplate restTemplate;
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws URISyntaxException {
 		this.restTemplate = new RestTemplate();
+		
+		
+		CampanhaRequest campanhaRequest = new CampanhaRequest();
+		Campanha campanha = new Campanha();
+		List<Campanha> campanhas = new ArrayList<Campanha>();
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(1);
+		campanha.setNomeCampanha("Natal");
+		campanhas.add(campanha);
+
+		
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(1);
+		campanha.setNomeCampanha("Dia das Maes");
+		campanhas.add(campanha);
+
+		
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(2);
+		campanha.setNomeCampanha("Dia dos namorados");
+		campanhas.add(campanha);
+
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(2);
+		campanha.setNomeCampanha("Dia dos Pais");
+		campanhas.add(campanha);
+
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(3);
+		campanha.setNomeCampanha("Black Friday");
+		campanhas.add(campanha);
+
+		
+		campanha.setDataFimVigencia(LocalDate.now());
+		campanha.setDataInicioVigencia(LocalDate.now());
+		campanha.setIdTimeCoracao(4);
+		campanha.setNomeCampanha("Natal");
+		campanhas.add(campanha);
+
+		campanhaRequest.setCampanhas(campanhas);
+		
+		RequestEntity<CampanhaRequest> request = new RequestEntity<CampanhaRequest>(campanhaRequest, HttpMethod.POST, new URI(BASE_PATH));
+		restTemplate.postForEntity(BASE_PATH, request, CampanhaResponse.class);
+		
+		
 	}
 	
 	@Test
 	public void testGet() {
 		ResponseEntity<CampanhaResponse> response = restTemplate.getForEntity(BASE_PATH, CampanhaResponse.class);
-		Assert.assertEquals("Testes ok", response.getBody().getMessage());
+		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
 	@Test
@@ -81,11 +136,20 @@ public class CampanhaControllerTeste {
 		campanha.setIdTimeCoracao(1);
 		campanha.setNomeCampanha("Teste PUT (UPDATE)");
 		
+		campanhaRequest.setCampanha(campanha);
+		
 		RequestEntity<CampanhaRequest> request = new RequestEntity<CampanhaRequest>(campanhaRequest, HttpMethod.PUT, new URI(BASE_PATH));
 		restTemplate.put(BASE_PATH + "//" + id, request);
 		
 		Assert.assertTrue(true);
 		
+	}
+	
+	
+	@Test
+	public void testDelete() {
+		restTemplate.delete(BASE_PATH + "/1");
+		Assert.assertTrue(true);
 	}
 	
 

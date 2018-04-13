@@ -39,9 +39,9 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	public ResponseEntity<CampanhaResponse> get()  {
 		
 		CampanhaResponse campanha = new CampanhaResponse();
-		campanha.setMessage("Testes ok");
-		
 		campanha.setCampanhas(campanhaService.getAll());
+		
+		
 		
 		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
 		 
@@ -50,7 +50,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 
 	@Override
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> put(@PathVariable Integer id, RequestEntity<CampanhaRequest> request) {
 		
@@ -75,18 +75,20 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 			return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
 		
 		
-		if(resource.getCampanhas().size() > 1)
+		if(resource.getCampanhas().size() < 1)
 			throw new CampanhaException("Nenhum registro encontrado");
 		else if(resource.getCampanhas().size() == 1)
 			campanhaService.createCampanha(resource.getCampanhas().get(0));
+		else 
+			campanhaService.createCampanha(resource.getCampanhas());
 		
-		return null;
+		return new ResponseEntity<CampanhaResponse>(HttpStatus.OK);
 		
 	}
 
 	@Override
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
-	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public void delete(@PathVariable Integer id) {
 		campanhaService.deleteCampanha(id);
