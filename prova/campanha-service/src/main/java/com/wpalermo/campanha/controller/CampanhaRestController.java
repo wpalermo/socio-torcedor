@@ -65,7 +65,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	
 	@Override
 	@RequestMapping(method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.OK)
+	@ResponseStatus(value = HttpStatus.CREATED)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> post(RequestEntity<CampanhaRequest> request) {
 		
@@ -82,7 +82,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		else 
 			campanhaService.createCampanha(resource.getCampanhas());
 		
-		return new ResponseEntity<CampanhaResponse>(HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 		
 	}
 
@@ -93,6 +93,9 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	public void delete(@PathVariable Integer id) {
 		campanhaService.deleteCampanha(id);
 	}
+
+
+
 
 
 
