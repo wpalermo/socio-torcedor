@@ -44,7 +44,6 @@ public class CampanhaService implements ICampanhaService {
 	@Override
 	public void updateCampanha(Integer id, Campanha campanha)  throws CampanhaException {
 	
-		campanhaRepository.update(id, campanha);
 	}
 
 	@Override
