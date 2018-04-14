@@ -2,7 +2,7 @@ package com.wpalermo.socioTorcedor.response;
 
 import java.util.List;
 
-import com.wpalermo.socioTorcedor.bean.Campanha;
+import com.wpalermo.socioTorcedor.entities.Campanha;
 
 public class CadastrarSocioTorcedorResponse {
 	

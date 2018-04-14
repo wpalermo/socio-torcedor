@@ -1,6 +1,6 @@
 package com.wpalermo.socioTorcedor.service;
 
-import com.wpalermo.socioTorcedor.bean.SocioTorcedor;
+import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;

@@ -1,9 +1,19 @@
-package com.wpalermo.socioTorcedor.bean;
+package com.wpalermo.socioTorcedor.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class SocioTorcedor {
 
-	private String nome;
+	@Id
 	private String email;
+	
+	@Column
+	private String nome;
+	
+	@Column
 	private TimeCoracao timeCoracao;
 	
 	public String getNome() {

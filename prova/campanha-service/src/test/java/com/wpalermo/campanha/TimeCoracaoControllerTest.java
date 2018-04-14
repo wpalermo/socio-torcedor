@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -89,7 +90,7 @@ public class TimeCoracaoControllerTest {
 		restTemplate.postForEntity(CAMPANHA_PATH, request, CampanhaResponse.class);
 	}
 	
-	
+	@Test
 	public void testGetByTimeCoracao() throws RestClientException, URISyntaxException{
 		
 		Object o = restTemplate.getForEntity(new URI(TIME_PATH + "/1"), CampanhaResponse.class);

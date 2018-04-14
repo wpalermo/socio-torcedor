@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import com.wpalermo.socioTorcedor.bean.Campanha;
-import com.wpalermo.socioTorcedor.bean.SocioTorcedor;
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.dao.ISocioTorcedorDAO;
+import com.wpalermo.socioTorcedor.entities.Campanha;
+import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
+import com.wpalermo.socioTorcedor.reposiroty.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
@@ -24,16 +25,19 @@ import com.wpalermo.socioTorcedor.utils.PersistenceDatailEnum;
 @Service
 public class SocioTorcedorService implements ISocioTorcedorService {
 
+	private Logger logger = Logger.getLogger(this.getClass());
+
 	@Autowired
-	private ISocioTorcedorDAO socioTorcedorDAO;
+	private SocioTorcedorRepository socioTorcedorRepository;
 
 	@Autowired
 	private RestServers restServers;
+	
 
 	@Override
 	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
 
-		Logger logger = Logger.getLogger(this.getClass());
+		
 
 		try {
 				socioTorcedorDAO.cadastrarSocioTorcedor(socioTorcedor);

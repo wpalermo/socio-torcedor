@@ -1,11 +1,23 @@
-package com.wpalermo.socioTorcedor.bean;
+package com.wpalermo.socioTorcedor.entities;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+
+@Entity
 public class TimeCoracao {
 	
+	@Id
 	private Integer idTimeCoracao;
+	
+	@Column
 	private String nomeTimeCoracao;
+	
+	@OneToMany
 	private List<Campanha> campanhasAssociadas;
 	
 	

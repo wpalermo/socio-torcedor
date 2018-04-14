@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wpalermo.socioTorcedor.bean.SocioTorcedor;
+import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
@@ -26,7 +26,7 @@ public class SocioTorcedorController {
 	@Autowired
 	private ISocioTorcedorService socioTorcedorService;
 	
-	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
+	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
@@ -35,7 +35,7 @@ public class SocioTorcedorController {
 		return socioTorcedorService.cadastrarSocioTorcedor(socioTorcedor);
 	}
 	
-	@RequestMapping(value = "/buscar", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public SocioTorcedor buscarSocioTorcedor(@RequestParam String email) throws SocioTorcedorException, PersistenceException {
