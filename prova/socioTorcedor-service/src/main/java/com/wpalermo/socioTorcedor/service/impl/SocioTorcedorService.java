@@ -11,7 +11,6 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
-import com.wpalermo.socioTorcedor.dao.ISocioTorcedorDAO;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
@@ -40,7 +39,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		
 
 		try {
-				socioTorcedorDAO.cadastrarSocioTorcedor(socioTorcedor);
+			socioTorcedorRepository.save(socioTorcedor);
 	
 				logger.info("Iniciando chamada de servico de campanha - URL: " + restServers.getCampanhaUrl() + "/campanha/buscaPorItme?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao());
 				
@@ -53,7 +52,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 					//Associa as campanhas
 					socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
 		
-					socioTorcedorDAO.updateSocioTorcedor(socioTorcedor);
+					
+					//TODO: UPDATE	
+					socioTorcedorRepository.save(socioTorcedor);
 					
 					//gera a response
 					CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
@@ -72,7 +73,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			try {
 				if (e.getPersistenceEnum().equals(PersistenceDatailEnum.EMAIL_EXISTENTE)) {
 
-					SocioTorcedor socioEncontrado = socioTorcedorDAO.buscarSocioTorcedor(socioTorcedor.getEmail());
+					SocioTorcedor socioEncontrado = socioTorcedorRepository.findById(socioTorcedor.getEmail()).get();
 					
 					if(socioEncontrado.getTimeCoracao().getCampanhasAssociadas() == null || socioEncontrado.getTimeCoracao().getCampanhasAssociadas().isEmpty()) {
 						ListaCampanhaResponse response = new RestTemplate().getForObject(restServers.getCampanhaUrl() + "/campanha/buscaPorTime?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao(), ListaCampanhaResponse.class);
@@ -101,7 +102,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 					CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 					cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
 					cadastrarSocioTorcedorResponse.setMessage("Campanhas atualizadas para o email  " + socioEncontrado.getEmail());
-					socioTorcedorDAO.updateSocioTorcedor(socioEncontrado);
+					
+					//TODO: UPDATE
+					socioTorcedorRepository.save(socioEncontrado);
 					
 					return cadastrarSocioTorcedorResponse;
 
@@ -116,7 +119,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	
 	@Override
 	public SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException {
-		return socioTorcedorDAO.buscarSocioTorcedor(email);
+		return socioTorcedorRepository.findById(email).get();
 	}
 
 }
