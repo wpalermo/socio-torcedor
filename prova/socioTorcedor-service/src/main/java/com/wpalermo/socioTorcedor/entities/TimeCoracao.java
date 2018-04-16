@@ -1,7 +1,9 @@
 package com.wpalermo.socioTorcedor.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,15 +11,17 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-public class TimeCoracao {
+public class TimeCoracao implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private Integer idTimeCoracao;
 	
 	@Column
 	private String nomeTimeCoracao;
 	
-	@OneToMany
+	@OneToMany(mappedBy="idCampanha", cascade = CascadeType.ALL)
 	private List<Campanha> campanhasAssociadas;
 	
 	

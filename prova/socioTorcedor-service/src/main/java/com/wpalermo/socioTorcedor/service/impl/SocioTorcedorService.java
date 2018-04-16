@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
@@ -19,7 +18,6 @@ import com.wpalermo.socioTorcedor.reposiroty.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
-import com.wpalermo.socioTorcedor.utils.PersistenceDatailEnum;
 
 @Service
 public class SocioTorcedorService implements ISocioTorcedorService {
@@ -31,95 +29,87 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 	@Autowired
 	private RestServers restServers;
-	
 
 	@Override
-	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
+	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor)
+			throws SocioTorcedorException, PersistenceException {
 
-		
+		RestTemplate restTemplate = new RestTemplate();
 
-		try {
-			socioTorcedorRepository.save(socioTorcedor);
-	
-				logger.info("Iniciando chamada de servico de campanha - URL: " + restServers.getCampanhaUrl() + "/campanha/buscaPorItme?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao());
-				
-				try {
-					//Chamada de servico
-					RestTemplate restTemplate = new RestTemplate();
-					ListaCampanhaResponse response = restTemplate.getForObject(restServers.getCampanhaUrl() + "/campanha/buscaPorTime?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao(),
-							ListaCampanhaResponse.class);
-		
-					//Associa as campanhas
-					socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
-		
-					
-					//TODO: UPDATE	
-					socioTorcedorRepository.save(socioTorcedor);
-					
-					//gera a response
-					CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
-					cadastrarSocioTorcedorResponse.setCampanhas(socioTorcedor.getTimeCoracao().getCampanhasAssociadas());
-					cadastrarSocioTorcedorResponse.setMessage("Usuario cadastrado com sucesso - email  " + socioTorcedor.getEmail());
-					
-					
-					return cadastrarSocioTorcedorResponse;
-					
-				}catch (ResourceAccessException rae) {
-					logger.warn("Problema ao tentar acessar servico de CAMPANHAS " + rae.getMessage());
-					throw new SocioTorcedorException("Problema ao associar as campanhas servico fora do ar. SocioTorcedor cadastrado sem campanhas, tente novamente mais tarde", rae);
-				}
+		final String URL = restServers.getCampanhaUrl() + "/campanha/socioTorcedor/"
+				+ socioTorcedor.getTimeCoracao().getIdTimeCoracao();
 
-		} catch (PersistenceException e) {
-			try {
-				if (e.getPersistenceEnum().equals(PersistenceDatailEnum.EMAIL_EXISTENTE)) {
+		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 
-					SocioTorcedor socioEncontrado = socioTorcedorRepository.findById(socioTorcedor.getEmail()).get();
-					
-					if(socioEncontrado.getTimeCoracao().getCampanhasAssociadas() == null || socioEncontrado.getTimeCoracao().getCampanhasAssociadas().isEmpty()) {
-						ListaCampanhaResponse response = new RestTemplate().getForObject(restServers.getCampanhaUrl() + "/campanha/buscaPorTime?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao(), ListaCampanhaResponse.class);
+			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
 
-						CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
-						cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
-						cadastrarSocioTorcedorResponse.setMessage("Cadastro ja existente para o email  " + socioEncontrado.getEmail());
-						
-						return cadastrarSocioTorcedorResponse;
+			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 
-					}
-					ListaCampanhaResponse response = new RestTemplate().getForObject(restServers.getCampanhaUrl() + "/campanha/buscaPorTime?idTimeCoracao=" + socioTorcedor.getTimeCoracao().getIdTimeCoracao(), ListaCampanhaResponse.class);
+			if (socioTorcedor.getTimeCoracao().getCampanhasAssociadas() == null
+					|| socioTorcedor.getTimeCoracao().getCampanhasAssociadas().isEmpty()) {
 
-					Set<Integer> ids = socioEncontrado.getTimeCoracao().getCampanhasAssociadas().stream()
-																								.map(Campanha::getIdCampanha)
-																								.collect(Collectors.toSet());
+				cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
+				cadastrarSocioTorcedorResponse.setMessage(
+						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
 
-					List<Campanha> campanhasFaltantes = response.getCampanhas().stream()
-																			   .filter(camp -> !ids.contains(camp.getIdCampanha()))
-																			   .collect(Collectors.toList());
+				return cadastrarSocioTorcedorResponse;
 
-					socioEncontrado.getTimeCoracao().getCampanhasAssociadas().addAll(campanhasFaltantes);
+			} else {
 
-					
-					
-					CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
-					cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
-					cadastrarSocioTorcedorResponse.setMessage("Campanhas atualizadas para o email  " + socioEncontrado.getEmail());
-					
-					//TODO: UPDATE
-					socioTorcedorRepository.save(socioEncontrado);
-					
-					return cadastrarSocioTorcedorResponse;
+				socioTorcedor = atualizarCampanhas(socioTorcedor, response.getCampanhas());
 
-				}
-			} catch (ResourceAccessException rae) {
-				logger.warn("Problema ao tentar acessar servico de CAMPANHAS " + rae.getMessage());
-				throw new SocioTorcedorException("Problema ao acossiar as campanhas servico fora do ar. SocioTorcedor sem atualizacao das campanhas, tente novamente mais tarde", rae);
+				cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
+				cadastrarSocioTorcedorResponse.setMessage(
+						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
+
+				return cadastrarSocioTorcedorResponse;
+
 			}
+
+		} else {
+
+			socioTorcedorRepository.save(socioTorcedor);
+
+			logger.info("Iniciando chamada de servico de campanha - URL: " + URL);
+
+			// Chamada de servico
+
+			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+
+			// Associa as campanhas
+			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
+
+			socioTorcedorRepository.save(socioTorcedor);
+
+			// gera a response
+			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
+			cadastrarSocioTorcedorResponse.setCampanhas(socioTorcedor.getTimeCoracao().getCampanhasAssociadas());
+			cadastrarSocioTorcedorResponse
+					.setMessage("Usuario cadastrado com sucesso - email  " + socioTorcedor.getEmail());
+
+			return cadastrarSocioTorcedorResponse;
+
 		}
-		return null;
 	}
-	
+
 	@Override
 	public SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException {
 		return socioTorcedorRepository.findById(email).get();
+	}
+
+	
+	
+	private SocioTorcedor atualizarCampanhas(SocioTorcedor socio, List<Campanha> campanhas) {
+
+		Set<Integer> ids = socio.getTimeCoracao().getCampanhasAssociadas().stream().map(Campanha::getIdCampanha)
+				.collect(Collectors.toSet());
+
+		List<Campanha> campanhasFaltantes = campanhas.stream().filter(camp -> !ids.contains(camp.getIdCampanha()))
+				.collect(Collectors.toList());
+
+		socio.getTimeCoracao().getCampanhasAssociadas().addAll(campanhasFaltantes);
+
+		return socio;
 	}
 
 }
