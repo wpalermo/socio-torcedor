@@ -1,11 +1,13 @@
 package com.wpalermo.socioTorcedor.exception;
 
 import java.io.IOException;
+import java.net.ConnectException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -27,5 +29,13 @@ public class SocioTorcedorServiceExceptionHandler extends ResponseEntityExceptio
 	public String ioException(Exception e) {
 		return "Erro generico com data de vigencia " + e.getMessage() ;
 	}
+	
+	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason="Chamada de servico externo")
+	@ExceptionHandler(value= {ResourceAccessException.class, ConnectException.class}) 
+	public String httpException(Exception e) {
+		return "Erro ao acessar servico externo " + e.getMessage() ;
+	}
+	
+	
 
 }

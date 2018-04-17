@@ -6,14 +6,15 @@ import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
-import com.wpalermo.socioTorcedor.exception.PersistenceException;
-import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
+import com.wpalermo.socioTorcedor.exception.CampanhaServiceException;
 import com.wpalermo.socioTorcedor.reposiroty.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
@@ -31,8 +32,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	private RestServers restServers;
 
 	@Override
-	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor)
-			throws SocioTorcedorException, PersistenceException {
+	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
 
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -41,14 +41,17 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 
-			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+			ResponseEntity<ListaCampanhaResponse> response = restTemplate.getForObject(URL, ResponseEntity.class);
+			
+			if(response.getStatusCode() != HttpStatus.OK)
+				throw new CampanhaServiceException();
 
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 
 			if (socioTorcedor.getTimeCoracao().getCampanhasAssociadas() == null
 					|| socioTorcedor.getTimeCoracao().getCampanhasAssociadas().isEmpty()) {
 
-				cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
+				cadastrarSocioTorcedorResponse.setCampanhas(response.getBody().getCampanhas());
 				cadastrarSocioTorcedorResponse.setMessage(
 						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
 
@@ -56,9 +59,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 			} else {
 
-				socioTorcedor = atualizarCampanhas(socioTorcedor, response.getCampanhas());
+				socioTorcedor = atualizarCampanhas(socioTorcedor, response.getBody().getCampanhas());
 
-				cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
+				cadastrarSocioTorcedorResponse.setCampanhas(response.getBody().getCampanhas());
 				cadastrarSocioTorcedorResponse.setMessage(
 						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
 
@@ -73,11 +76,16 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			logger.info("Iniciando chamada de servico de campanha - URL: " + URL);
 
 			// Chamada de servico
-
-			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+			
+			ResponseEntity<ListaCampanhaResponse> response = restTemplate.getForObject(URL, ResponseEntity.class);
+			
+			if(response.getStatusCode() != HttpStatus.OK)
+				throw new CampanhaServiceException();
 
 			// Associa as campanhas
-			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
+			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getBody().getCampanhas());
+			
+			
 
 			socioTorcedorRepository.save(socioTorcedor);
 
@@ -93,7 +101,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	}
 
 	@Override
-	public SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException {
+	public SocioTorcedor buscarSocioTorcedor(String email){
 		return socioTorcedorRepository.findById(email).get();
 	}
 

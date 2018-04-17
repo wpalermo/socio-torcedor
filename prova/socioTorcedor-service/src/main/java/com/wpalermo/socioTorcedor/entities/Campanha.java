@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -24,8 +24,7 @@ public class Campanha implements Serializable{
 	@Column
 	private String nomeCampanha;
 	
-	//@ManyToOne
-	@Transient
+	@ManyToOne
 	private TimeCoracao timeCoracao;
 	
 	@Column

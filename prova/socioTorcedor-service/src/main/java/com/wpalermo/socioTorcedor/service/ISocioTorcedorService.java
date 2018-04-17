@@ -14,7 +14,7 @@ public interface ISocioTorcedorService {
 	 * @throws SocioTorcedorException
 	 * @throws PersistenceException
 	 */
-	CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException;
+	CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor);
 
 	/**
 	 * Busca um socio torcedor pelo seu email
@@ -22,6 +22,6 @@ public interface ISocioTorcedorService {
 	 * @return
 	 * @throws PersistenceException 
 	 */
-	SocioTorcedor buscarSocioTorcedor(String email) throws PersistenceException;
+	SocioTorcedor buscarSocioTorcedor(String email);
 
 }
