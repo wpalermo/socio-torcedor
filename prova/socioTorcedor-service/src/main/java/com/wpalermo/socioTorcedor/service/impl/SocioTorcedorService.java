@@ -42,9 +42,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 
 			ResponseEntity<ListaCampanhaResponse> response = restTemplate.getForObject(URL, ResponseEntity.class);
-			
-			if(response.getStatusCode() != HttpStatus.OK)
-				throw new CampanhaServiceException();
+
 
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 
