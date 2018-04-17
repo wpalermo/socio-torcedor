@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -18,14 +19,14 @@ public class Campanha implements Serializable{
 
 	@Id
 	@GeneratedValue
-	@ManyToOne
 	private Integer idCampanha;
 	
 	@Column
 	private String nomeCampanha;
 	
-	@Column
-	private Integer idTimeCoracao;
+	//@ManyToOne
+	@Transient
+	private TimeCoracao timeCoracao;
 	
 	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
@@ -36,6 +37,8 @@ public class Campanha implements Serializable{
 	private LocalDate dataFimVigencia;
 	
 	
+	
+	
 	public Campanha() {
 		
 	}
@@ -44,14 +47,9 @@ public class Campanha implements Serializable{
 		return idCampanha;
 	}
 	public void setIdCampanha(Integer idCampanha) {
-		this.idCampanha = idCampanha;
+		this.idCampanha = idCampanha; 
 	}
-	public Integer getIdTimeCoracao() {
-		return idTimeCoracao;
-	}
-	public void setIdTimeCoracao(Integer idTimeCoracao) {
-		this.idTimeCoracao = idTimeCoracao;
-	}
+
 	public String getNomeCampanha() {
 		return nomeCampanha;
 	}
@@ -70,6 +68,16 @@ public class Campanha implements Serializable{
 	public void setDataFimVigencia(LocalDate dataFimVigencia) {
 		this.dataFimVigencia = dataFimVigencia;
 	}
+
+	public TimeCoracao getTimeCoracao() {
+		return timeCoracao;
+	}
+
+	public void setTimeCoracao(TimeCoracao timeCoracao) {
+		this.timeCoracao = timeCoracao;
+	}
+
+
 
 
 	

@@ -2,6 +2,8 @@ package com.wpalermo.socioTorcedor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,18 +31,15 @@ public class SocioTorcedorController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(@RequestBody SocioTorcedor socioTorcedor) throws SocioTorcedorException, PersistenceException {
-		
-		
-		return socioTorcedorService.cadastrarSocioTorcedor(socioTorcedor);
+	public ResponseEntity<CadastrarSocioTorcedorResponse> post(RequestEntity<SocioTorcedor> request) throws SocioTorcedorException, PersistenceException {
+		return new ResponseEntity<>(socioTorcedorService.cadastrarSocioTorcedor(request.getBody()), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public SocioTorcedor buscarSocioTorcedor(@RequestParam String email) throws SocioTorcedorException, PersistenceException {
-		
-		return socioTorcedorService.buscarSocioTorcedor(email);
+	public ResponseEntity<SocioTorcedor> get(String email) throws SocioTorcedorException, PersistenceException {
+		return new ResponseEntity<>(socioTorcedorService.buscarSocioTorcedor(email), HttpStatus.OK);
 	}
 	
 	

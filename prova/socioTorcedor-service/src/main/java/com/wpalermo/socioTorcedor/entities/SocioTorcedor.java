@@ -5,16 +5,12 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class SocioTorcedor implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,8 +19,7 @@ public class SocioTorcedor implements Serializable {
 	@Column
 	private String nome;
 	
-	@Column
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy="socioTorcedor")
 	private TimeCoracao timeCoracao;
 	
 	public String getNome() {

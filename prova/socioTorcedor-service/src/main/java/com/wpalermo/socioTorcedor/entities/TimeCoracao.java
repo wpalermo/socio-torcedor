@@ -3,11 +3,11 @@ package com.wpalermo.socioTorcedor.entities;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 
 @Entity
@@ -21,8 +21,12 @@ public class TimeCoracao implements Serializable{
 	@Column
 	private String nomeTimeCoracao;
 	
-	@OneToMany(mappedBy="idCampanha", cascade = CascadeType.ALL)
+	//@OneToMany(mappedBy = "timeCoracao", cascade = CascadeType.ALL)
+	@Transient
 	private List<Campanha> campanhasAssociadas;
+	
+	@OneToOne
+	private SocioTorcedor socioTorcedor;
 	
 	
 	public Integer getIdTimeCoracao() {
@@ -42,6 +46,12 @@ public class TimeCoracao implements Serializable{
 	}
 	public void setCampanhasAssociadas(List<Campanha> campanhasAssociadas) {
 		this.campanhasAssociadas = campanhasAssociadas;
+	}
+	public SocioTorcedor getSocioTorcedor() {
+		return socioTorcedor;
+	}
+	public void setSocioTorcedor(SocioTorcedor socioTorcedor) {
+		this.socioTorcedor = socioTorcedor;
 	}
 	
 	
