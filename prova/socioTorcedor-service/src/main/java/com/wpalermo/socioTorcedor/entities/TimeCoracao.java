@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class TimeCoracao implements Serializable{
@@ -22,10 +25,12 @@ public class TimeCoracao implements Serializable{
 	@Column
 	private String nomeTimeCoracao;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "timeCoracao", cascade = CascadeType.ALL)
 	private List<Campanha> campanhasAssociadas;
 	
 	@OneToOne
+	@JsonBackReference
 	private SocioTorcedor socioTorcedor;
 	
 	

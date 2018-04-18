@@ -42,4 +42,16 @@ public class SocioTorcedorController {
 	}
 	
 	
+	@RequestMapping(method = RequestMethod.PUT, path = "/{email}")
+	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseBody
+	public void put() {
+	}
+	
+	@RequestMapping(method = RequestMethod.DELETE, path = "/{email}")
+	@ResponseStatus(value = HttpStatus.METHOD_NOT_ALLOWED)
+	@ResponseBody
+	public void delete() {
+	}
+	
 }

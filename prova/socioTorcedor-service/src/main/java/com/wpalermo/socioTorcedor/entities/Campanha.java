@@ -8,9 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 public class Campanha implements Serializable{
@@ -24,6 +26,7 @@ public class Campanha implements Serializable{
 	@Column
 	private String nomeCampanha;
 	
+	@JsonBackReference
 	@ManyToOne
 	private TimeCoracao timeCoracao;
 	
