@@ -13,7 +13,7 @@ import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.entities.TimeCoracao;
-import com.wpalermo.socioTorcedor.reposiroty.SocioTorcedorRepository;
+import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;

@@ -1,4 +1,4 @@
-package com.wpalermo.socioTorcedor.reposiroty;
+package com.wpalermo.socioTorcedor.repository;
 
 import org.springframework.data.repository.CrudRepository;
 

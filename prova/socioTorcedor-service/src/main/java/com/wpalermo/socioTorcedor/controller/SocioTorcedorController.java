@@ -37,7 +37,7 @@ public class SocioTorcedorController {
 	@RequestMapping(method = RequestMethod.GET, path = "/{email}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<SocioTorcedor> get(@PathVariable String email) throws SocioTorcedorException, PersistenceException {
+	public ResponseEntity<SocioTorcedor> get(@PathVariable String email){
 		return new ResponseEntity<>(socioTorcedorService.buscarSocioTorcedor(email), HttpStatus.OK);
 	}
 	
