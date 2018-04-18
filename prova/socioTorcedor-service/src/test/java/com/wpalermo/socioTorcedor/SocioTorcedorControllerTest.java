@@ -28,6 +28,19 @@ public class SocioTorcedorControllerTest {
 	@Before
 	public void setUp() {
 		this.restTemplate = new RestTemplate();
+		
+		TimeCoracao timeCoracao = new TimeCoracao();
+		timeCoracao.setIdTimeCoracao(1);
+		timeCoracao.setNomeTimeCoracao("Sao Paulo Futebol Clube");
+		
+		SocioTorcedor socio = new SocioTorcedor();
+		socio.setEmail("palermow@gmail.com");
+		socio.setNome("William");
+		socio.setTimeCoracao(timeCoracao);
+		
+		
+		restTemplate.postForEntity(BASE_PATH, socio, SocioTorcedor.class);
+			
 	}
 	
 	
@@ -42,8 +55,8 @@ public class SocioTorcedorControllerTest {
 		timeCoracao.setNomeTimeCoracao("Sao Paulo Futebol Clube");
 		
 		SocioTorcedor socio = new SocioTorcedor();
-		socio.setEmail("palermow@gmail.com");
-		socio.setNome("William");
+		socio.setEmail("palermow@gmail2.com");
+		socio.setNome("William 2 ");
 		socio.setTimeCoracao(timeCoracao);
 		
 		ResponseEntity<SocioTorcedor> response = restTemplate.postForEntity(BASE_PATH, socio, SocioTorcedor.class);
@@ -57,6 +70,8 @@ public class SocioTorcedorControllerTest {
 	
 	@Test
 	public void testGet() {
+		
+		//restTemplate.getForEntity(BASE_PATH, responseType)
 		
 		Assert.assertTrue(true);
 		

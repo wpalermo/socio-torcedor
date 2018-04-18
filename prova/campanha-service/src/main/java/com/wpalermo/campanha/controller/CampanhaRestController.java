@@ -21,7 +21,6 @@ import com.wpalermo.campanha.request.CampanhaRequest;
 import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ICampanhaService;
 
-
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/campanha")
@@ -36,52 +35,54 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<CampanhaResponse> get()  {
-		
+	public ResponseEntity<CampanhaResponse> get() {
+
 		CampanhaResponse campanha = new CampanhaResponse();
 		campanha.setCampanhas(campanhaService.getAll());
-		
-		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
-		 
-	}
 
+		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
+
+	}
 
 	@Override
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> put(@PathVariable Integer id, RequestEntity<CampanhaRequest> request) {
-		
+
 		Campanha c = request.getBody().getCampanha();
-		
+
 		c.setIdCampanha(id);
 		campanhaService.createCampanha(c);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	
-	
 	@Override
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@ResponseBody
 	public ResponseEntity<CampanhaResponse> post(RequestEntity<CampanhaRequest> request) {
-		
+
 		CampanhaRequest resource = request.getBody();
-		
-		if(resource.getCampanhas() == null || resource.getCampanhas().size() == 0)
-			return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
-		
-		
-		if(resource.getCampanhas().size() < 1)
-			throw new CampanhaException("Nenhum registro encontrado");
-		else if(resource.getCampanhas().size() == 1)
-			campanhaService.createCampanha(resource.getCampanhas().get(0));
-		else 
-			campanhaService.createCampanha(resource.getCampanhas());
-		
+
+		if (resource.getCampanha() != null) {
+			campanhaService.createCampanha(resource.getCampanha());
+
+		} else {
+
+			if (resource.getCampanhas() == null || resource.getCampanhas().size() == 0)
+				return new ResponseEntity<>(HttpStatus.LENGTH_REQUIRED);
+
+			if (resource.getCampanhas().size() < 1)
+				throw new CampanhaException("Nenhum registro encontrado");
+			else if (resource.getCampanhas().size() == 1)
+				campanhaService.createCampanha(resource.getCampanhas().get(0));
+			else
+				campanhaService.createCampanha(resource.getCampanhas());
+		}
+
 		return new ResponseEntity<>(HttpStatus.CREATED);
-		
+
 	}
 
 	@Override
@@ -91,11 +92,5 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	public void delete(@PathVariable Integer id) {
 		campanhaService.deleteCampanha(id);
 	}
-
-
-
-
-
-
 
 }

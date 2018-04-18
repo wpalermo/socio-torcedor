@@ -2,6 +2,7 @@ package com.wpalermo.socioTorcedor.exception;
 
 import java.io.IOException;
 import java.net.ConnectException;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -37,6 +37,14 @@ public class SocioTorcedorServiceExceptionHandler extends ResponseEntityExceptio
 	@ExceptionHandler(value = { HttpClientErrorException.class, ConnectException.class })
     protected ResponseEntity<Object>  handleConflict(RuntimeException ex, WebRequest request) {
         String bodyOfResponse = "Problema ao acessar servico de campanha";
+        return handleExceptionInternal(ex, bodyOfResponse, 
+          new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+	
+	
+	@ExceptionHandler(value = { NoSuchElementException.class})
+    protected ResponseEntity<Object>  socioNaoEncontrado(RuntimeException ex, WebRequest request) {
+        String bodyOfResponse = "SocioTorcedor nao encontrado \n" + ex.getMessage();
         return handleExceptionInternal(ex, bodyOfResponse, 
           new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

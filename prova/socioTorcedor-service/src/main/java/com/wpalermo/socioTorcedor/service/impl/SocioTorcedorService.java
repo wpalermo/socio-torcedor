@@ -36,7 +36,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		final String URL = restServers.getCampanhaUrl() + "/campanha/socioTorcedor/"
+		final String URL = restServers.getCampanhaUrl() + "/campanha/timeCoracao/"
 				+ socioTorcedor.getTimeCoracao().getIdTimeCoracao();
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
@@ -75,13 +75,11 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 			// Chamada de servico
 			
-			ResponseEntity<ListaCampanhaResponse> response = restTemplate.getForObject(URL, ResponseEntity.class);
+			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
 			
-			if(response.getStatusCode() != HttpStatus.OK)
-				throw new CampanhaServiceException();
 
 			// Associa as campanhas
-			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getBody().getCampanhas());
+			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
 			
 			
 

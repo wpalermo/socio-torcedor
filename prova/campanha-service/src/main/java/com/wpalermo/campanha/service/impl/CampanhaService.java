@@ -1,8 +1,8 @@
 package com.wpalermo.campanha.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.assertj.core.util.Lists;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,8 @@ public class CampanhaService implements ICampanhaService {
 	
 	@Override
 	public void createCampanha(Campanha campanha) {
-		
+		logger.debug("Saving: " + campanha.getNomeCampanha());
+		campanhaRepository.save(campanha);
 	}
 
 	@Override
@@ -54,7 +55,9 @@ public class CampanhaService implements ICampanhaService {
 
 	@Override
 	public List<Campanha> getAll() {
-		return Lists.newArrayList(campanhaRepository.findAll());
+		List<Campanha> returnable = new ArrayList<Campanha>();
+		campanhaRepository.findAll().forEach(returnable::add);
+		return returnable;
 	}
 
 

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
 
-@PropertySource(value="file:./application.properties")
+@PropertySource(value="file:./application.yml ")
 @SpringBootApplication
 public class Application {
 
