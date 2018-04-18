@@ -6,15 +6,13 @@ import java.util.stream.Collectors;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
-import com.wpalermo.socioTorcedor.exception.CampanhaServiceException;
+import com.wpalermo.socioTorcedor.entities.TimeCoracao;
 import com.wpalermo.socioTorcedor.reposiroty.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
@@ -41,7 +39,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 
-			ResponseEntity<ListaCampanhaResponse> response = restTemplate.getForObject(URL, ResponseEntity.class);
+			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
 
 
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
@@ -49,7 +47,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			if (socioTorcedor.getTimeCoracao().getCampanhasAssociadas() == null
 					|| socioTorcedor.getTimeCoracao().getCampanhasAssociadas().isEmpty()) {
 
-				cadastrarSocioTorcedorResponse.setCampanhas(response.getBody().getCampanhas());
+			cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
 				cadastrarSocioTorcedorResponse.setMessage(
 						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
 
@@ -57,9 +55,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 			} else {
 
-				socioTorcedor = atualizarCampanhas(socioTorcedor, response.getBody().getCampanhas());
+				socioTorcedor = atualizarCampanhas(socioTorcedor, response.getCampanhas());
 
-				cadastrarSocioTorcedorResponse.setCampanhas(response.getBody().getCampanhas());
+				cadastrarSocioTorcedorResponse.setCampanhas(response.getCampanhas());
 				cadastrarSocioTorcedorResponse.setMessage(
 						"Cadastro ja existente para o email  " + socioTorcedor.getEmail() + " atualizando campanhas");
 
@@ -75,8 +73,11 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 			// Chamada de servico
 			
-			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+ 			ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
 			
+			TimeCoracao time = socioTorcedor.getTimeCoracao();
+			time.setSocioTorcedor(socioTorcedor);
+			response.getCampanhas().forEach(c -> c.setTimeCoracao(time));
 
 			// Associa as campanhas
 			socioTorcedor.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
@@ -88,6 +89,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			// gera a response
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 			cadastrarSocioTorcedorResponse.setCampanhas(socioTorcedor.getTimeCoracao().getCampanhasAssociadas());
+			
 			cadastrarSocioTorcedorResponse
 					.setMessage("Usuario cadastrado com sucesso - email  " + socioTorcedor.getEmail());
 
