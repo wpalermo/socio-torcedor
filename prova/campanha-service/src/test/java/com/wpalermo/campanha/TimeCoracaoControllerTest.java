@@ -93,7 +93,7 @@ public class TimeCoracaoControllerTest {
 	@Test
 	public void testGetByTimeCoracao() throws RestClientException, URISyntaxException{
 		
-		Object o = restTemplate.getForEntity(new URI(TIME_PATH + "/1"), CampanhaResponse.class);
+		restTemplate.getForEntity(new URI(TIME_PATH + "/1"), CampanhaResponse.class);
 		
 		Assert.assertTrue(true);
 	}
