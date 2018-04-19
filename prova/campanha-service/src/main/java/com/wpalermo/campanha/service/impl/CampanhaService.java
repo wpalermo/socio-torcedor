@@ -26,13 +26,17 @@ public class CampanhaService implements ICampanhaService {
 	@Override
 	public void createCampanha(List<Campanha> campanhas)  {
 		logger.debug("Saving " + campanhas.size());
-		campanhaRepository.saveAll(campanhas);
+		campanhas.forEach(c -> createCampanha(c));
 		
 	}
 	
 	@Override
 	public void createCampanha(Campanha campanha) {
 		logger.debug("Saving: " + campanha.getNomeCampanha());
+		
+		while(campanhaRepository.existsByDataFimVigencia(campanha.getDataFimVigencia()))
+			campanha.setDataFimVigencia(campanha.getDataFimVigencia().plusDays(1));
+		
 		campanhaRepository.save(campanha);
 	}
 
