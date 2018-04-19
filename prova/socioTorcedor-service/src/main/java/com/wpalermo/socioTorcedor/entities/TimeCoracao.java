@@ -13,7 +13,13 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
+/**
+ * Entidade responsavel pela tabela de time do coracao
+ * 
+ * tem relacionamento One-to-many com campanhas e One-to-One com socioTorcedor
+ * @author william.palermo
+ *
+ */
 @Entity
 public class TimeCoracao implements Serializable{
 	

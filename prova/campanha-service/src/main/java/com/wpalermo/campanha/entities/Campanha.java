@@ -9,6 +9,12 @@ import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+/**
+ * Entidade responsavel pela tabela de campanhas
+ * @author william.palermo
+ *
+ */
+
 @Entity
 public class Campanha {
 	

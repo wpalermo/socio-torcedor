@@ -10,6 +10,14 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+/**
+ * Entidade responsavel pela tabela de socio torcedor
+ * 
+ * tem relacionamento One-to-One com timeCoracao
+ * @author william.palermo
+ *
+ */
 @Entity
 public class SocioTorcedor implements Serializable {
 

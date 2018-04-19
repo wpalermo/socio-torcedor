@@ -5,6 +5,12 @@ import java.io.Serializable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+
+/**
+ * Busca no arquivo de configuracao os enderecos dos servidores dos servicos que o socioTorcedor-service irá precisar
+ * @author william.palermo
+ *
+ */
 @Configuration
 public class RestServers implements Serializable {
 

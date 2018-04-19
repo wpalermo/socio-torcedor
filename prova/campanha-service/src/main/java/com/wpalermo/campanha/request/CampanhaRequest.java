@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.wpalermo.campanha.entities.Campanha;
 
+/**
+ * Encapsula o request de uma campanha
+ * @author william.palermo
+ *
+ */
 public class CampanhaRequest {
 	
 	

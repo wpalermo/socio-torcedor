@@ -5,6 +5,11 @@ import java.util.List;
 
 import com.wpalermo.campanha.entities.Campanha;
 
+/**
+ * Encapsula o response de uma campanha
+ * @author william.palermo
+ *
+ */
 public class CampanhaResponse implements Serializable{
 
 	

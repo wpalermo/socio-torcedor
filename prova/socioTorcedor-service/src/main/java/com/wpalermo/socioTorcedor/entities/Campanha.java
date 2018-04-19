@@ -12,6 +12,14 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
+/**
+ * Entidade responsavel pela tabela de campanha
+ * 
+ * Tem relacionamento Many-To-One com TimeCoracao
+ * @author william.palermo
+ *
+ */
 @Entity
 public class Campanha implements Serializable{
 	
