@@ -4,19 +4,19 @@ import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
-@EnableAutoConfiguration
+@PropertySource(value="file:./application.yml")
 @SpringBootApplication
-public class App {
+public class Application {
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(App.class, args);
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
-    
+
     @Bean
     public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
         return args -> {
@@ -31,4 +31,5 @@ public class App {
 
         };
     }
+
 }
