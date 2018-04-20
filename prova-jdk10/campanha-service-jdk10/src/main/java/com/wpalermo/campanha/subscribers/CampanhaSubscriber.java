@@ -1,0 +1,46 @@
+package com.wpalermo.campanha.subscribers;
+
+import java.util.concurrent.Flow.Subscriber;
+import java.util.concurrent.Flow.Subscription;
+
+import org.jboss.logging.Logger;
+
+import com.wpalermo.campanha.entities.Campanha;
+import com.wpalermo.campanha.service.ICampanhaService;
+
+public class CampanhaSubscriber implements Subscriber<Campanha>{
+
+	Logger logger = Logger.getLogger(this.getClass());
+	
+	private Subscription subscription;
+	
+	private ICampanhaService campanhaService;
+	
+	@Override
+	public void onSubscribe(Subscription subscription) {
+		this.subscription = subscription;
+		subscription.request(1);
+	}
+
+	@Override
+	public void onNext(Campanha item) {
+		campanhaService.createCampanha(item);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		subscription.request(1);
+	}
+
+	@Override
+	public void onError(Throwable throwable) {
+		logger.error("Erro ao adicionar registro");
+	}
+
+	@Override
+	public void onComplete() {
+		logger.info("Registro adicionado");
+	}
+
+}
