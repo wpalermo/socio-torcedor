@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.wpalermo.campanha.entities.Campanha;
 
-@Repository
 public interface CampanhaRepository extends CrudRepository<Campanha, Integer>{
 	
 	/**

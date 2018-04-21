@@ -20,7 +20,6 @@ public class CampanhaService implements ICampanhaService {
 	
 
 	
-	@Autowired
 	private CampanhaRepository campanhaRepository;
 
 	@Override

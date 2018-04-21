@@ -4,16 +4,20 @@ import java.util.concurrent.Flow.Subscriber;
 import java.util.concurrent.Flow.Subscription;
 
 import org.jboss.logging.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.service.ICampanhaService;
 
+@Service
 public class CampanhaSubscriber implements Subscriber<Campanha>{
 
 	Logger logger = Logger.getLogger(this.getClass());
 	
 	private Subscription subscription;
 	
+	@Autowired
 	private ICampanhaService campanhaService;
 	
 	@Override
