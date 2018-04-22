@@ -12,6 +12,7 @@ import com.wpalermo.campanha.service.ITimeCoracaoService;
 @Service
 public class TimeCoracaoService implements ITimeCoracaoService {
 
+	@Autowired
 	private CampanhaRepository campanhaRepository;
 	
 	@Override

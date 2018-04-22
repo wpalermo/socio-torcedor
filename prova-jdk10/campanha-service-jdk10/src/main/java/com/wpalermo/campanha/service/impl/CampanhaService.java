@@ -19,7 +19,7 @@ public class CampanhaService implements ICampanhaService {
 	private Logger logger = Logger.getLogger(this.getClass());
 	
 
-	
+	@Autowired
 	private CampanhaRepository campanhaRepository;
 
 	@Override

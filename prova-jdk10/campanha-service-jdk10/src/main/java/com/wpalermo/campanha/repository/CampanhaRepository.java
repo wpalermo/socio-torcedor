@@ -3,12 +3,13 @@ package com.wpalermo.campanha.repository;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.wpalermo.campanha.entities.Campanha;
 
-public interface CampanhaRepository extends CrudRepository<Campanha, Integer>{
+@Repository
+public interface CampanhaRepository extends MongoRepository<Campanha, Integer>{
 	
 	/**
 	 * Busca todas as campanhas de um time do coracao

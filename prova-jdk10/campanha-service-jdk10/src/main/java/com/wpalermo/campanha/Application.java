@@ -37,10 +37,5 @@ public class Application {
         };
     }
 
-    @Bean
-    public MongoClient mongoClient() {
-    	MongoClientURI mongoUri = new MongoClientURI("mongodb+srv://admin:admin@clustercampanha-ducke.mongodb.net/test");
-    	return new MongoClient(mongoUri);
-    }
-    
+
 }
