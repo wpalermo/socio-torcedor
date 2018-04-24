@@ -39,9 +39,11 @@ public class CampanhaControllerTeste {
 		
 		
 		CampanhaRequest campanhaRequest = new CampanhaRequest();
-		Campanha campanha = new Campanha();
+		
 		List<Campanha> campanhas = new ArrayList<Campanha>();
 		
+		
+		Campanha campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(1);
@@ -49,7 +51,7 @@ public class CampanhaControllerTeste {
 		campanhas.add(campanha);
 
 		
-		
+		campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(1);
@@ -57,35 +59,39 @@ public class CampanhaControllerTeste {
 		campanhas.add(campanha);
 
 		
-		
+		campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(2);
 		campanha.setNomeCampanha("Dia dos namorados");
 		campanhas.add(campanha);
 
-		
+		campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(2);
 		campanha.setNomeCampanha("Dia dos Pais");
 		campanhas.add(campanha);
 
-		
+		campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(3);
 		campanha.setNomeCampanha("Black Friday");
 		campanhas.add(campanha);
 
-		
+		campanha = new Campanha();
 		campanha.setDataFimVigencia(LocalDate.now());
 		campanha.setDataInicioVigencia(LocalDate.now());
 		campanha.setIdTimeCoracao(4);
 		campanha.setNomeCampanha("Natal");
 		campanhas.add(campanha);
 
+		campanhas.forEach(Campanha::atualizarIdCampanha);
+		
 		campanhaRequest.setCampanhas(campanhas);
+		
+		
 		
 		RequestEntity<CampanhaRequest> request = new RequestEntity<CampanhaRequest>(campanhaRequest, HttpMethod.POST, new URI(BASE_PATH));
 		restTemplate.postForEntity(BASE_PATH, request, CampanhaResponse.class);

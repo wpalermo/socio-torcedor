@@ -25,7 +25,7 @@ public interface ICampanhaService {
 	 * @param campanha
 	 * @throws CampanhaException
 	 */
-	void deleteCampanha(Integer campanha) throws CampanhaException;
+	void deleteCampanha(String campanha) throws CampanhaException;
 	
 	/**
 	 * Atualiza os dados de uma campanha

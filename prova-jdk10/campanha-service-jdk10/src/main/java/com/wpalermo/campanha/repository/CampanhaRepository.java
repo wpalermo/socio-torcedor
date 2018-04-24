@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.wpalermo.campanha.entities.Campanha;
 
 @Repository
-public interface CampanhaRepository extends MongoRepository<Campanha, Integer>{
+public interface CampanhaRepository extends MongoRepository<Campanha, String>{
 	
 	/**
 	 * Busca todas as campanhas de um time do coracao

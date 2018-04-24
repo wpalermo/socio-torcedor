@@ -8,11 +8,11 @@ public interface RestResource<T, K> {
 	
 	ResponseEntity<T> get() ;
 	
-	ResponseEntity<T> put(Integer id, RequestEntity<K> request);
+	ResponseEntity<T> put(String id, RequestEntity<K> request);
 	
 	ResponseEntity<T> post(RequestEntity<K> request) ;
 	
-	void delete(Integer request);
+	void delete(String id);
 	
 	
 }

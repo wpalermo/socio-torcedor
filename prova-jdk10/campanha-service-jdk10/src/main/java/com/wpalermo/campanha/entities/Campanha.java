@@ -3,6 +3,7 @@ package com.wpalermo.campanha.entities;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,10 +13,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  *
  */
 
+@Document(collection = "campanha")
 public class Campanha {
 	
 	@Id
-	private Integer idCampanha;
+	private String idCampanha;
 	
 	private String nomeCampanha;
 	
@@ -29,15 +31,19 @@ public class Campanha {
 	
 	
 	public Campanha() {
-		
 	}
 
-	public Integer getIdCampanha() {
+
+	public String getIdCampanha() {
 		return idCampanha;
 	}
-	public void setIdCampanha(Integer idCampanha) {
+
+
+	public void setIdCampanha(String idCampanha) {
 		this.idCampanha = idCampanha;
 	}
+
+
 	public Integer getIdTimeCoracao() {
 		return idTimeCoracao;
 	}
@@ -63,6 +69,10 @@ public class Campanha {
 		this.dataFimVigencia = dataFimVigencia;
 	}
 
+	
+	public void atualizarIdCampanha() {
+		this.idCampanha  = getNomeCampanha() + getDataFimVigencia().toString();
+	}
 
 	
 	

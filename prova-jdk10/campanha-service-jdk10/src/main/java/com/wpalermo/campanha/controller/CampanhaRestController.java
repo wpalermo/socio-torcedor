@@ -57,11 +57,12 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<CampanhaResponse> put(@PathVariable Integer id, RequestEntity<CampanhaRequest> request) {
+	public ResponseEntity<CampanhaResponse> put(@PathVariable String id, RequestEntity<CampanhaRequest> request) {
 
 		Campanha c = request.getBody().getCampanha();
-
 		c.setIdCampanha(id);
+
+		
 		campanhaService.createCampanha(c);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
@@ -98,7 +99,7 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public void delete(@PathVariable Integer id) {
+	public void delete(@PathVariable String id) {
 		campanhaService.deleteCampanha(id);
 	}
 

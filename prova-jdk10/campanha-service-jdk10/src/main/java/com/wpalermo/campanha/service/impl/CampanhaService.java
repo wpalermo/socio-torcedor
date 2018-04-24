@@ -36,11 +36,12 @@ public class CampanhaService implements ICampanhaService {
 		while(campanhaRepository.existsByDataFimVigencia(campanha.getDataFimVigencia()))
 			campanha.setDataFimVigencia(campanha.getDataFimVigencia().plusDays(1));
 		
+		campanha.atualizarIdCampanha();
 		campanhaRepository.save(campanha);
 	}
 
 	@Override
-	public void deleteCampanha(Integer campanhaId) throws CampanhaException {
+	public void deleteCampanha(String campanhaId) throws CampanhaException {
 		logger.debug("Deleting id: " + campanhaId);
 		campanhaRepository.deleteById(campanhaId);;
 	}
