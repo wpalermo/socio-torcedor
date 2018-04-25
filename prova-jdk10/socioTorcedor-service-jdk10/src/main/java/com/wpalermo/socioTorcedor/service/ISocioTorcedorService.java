@@ -23,5 +23,9 @@ public interface ISocioTorcedorService {
 	 * @throws PersistenceException 
 	 */
 	SocioTorcedor buscarSocioTorcedor(String email);
+	
+	
+	void atualizarCampanhas(SocioTorcedor socio);
+
 
 }
