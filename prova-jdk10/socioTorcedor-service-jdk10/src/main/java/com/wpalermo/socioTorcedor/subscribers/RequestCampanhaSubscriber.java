@@ -57,7 +57,7 @@ public class RequestCampanhaSubscriber implements Subscriber<SocioTorcedor>{
 	@Override
 	public void onComplete() {
 		
-		socio.getTimeCoracao().setCampanhasAssociadas(response.getCampanhas());
+		socio = socioTorcedorService.atualizarCampanhas(socio, response.getCampanhas());
 		
 		socioTorcedorService.atualizarCampanhas(socio);
 		

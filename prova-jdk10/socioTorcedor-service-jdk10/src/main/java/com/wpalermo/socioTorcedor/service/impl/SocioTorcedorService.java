@@ -12,23 +12,19 @@ import org.springframework.stereotype.Service;
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
-import com.wpalermo.socioTorcedor.entities.TimeCoracao;
 import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.CadastrarSocioTorcedorResponse;
-import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 import com.wpalermo.socioTorcedor.subscribers.RequestCampanhaSubscriber;
 
 @Service
 public class SocioTorcedorService implements ISocioTorcedorService {
 
-	private Logger logger = Logger.getLogger(this.getClass());
+	//private Logger logger = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private SocioTorcedorRepository socioTorcedorRepository;
 
-	@Autowired
-	private RestServers restServers;
 
 	@Override
 	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
@@ -41,7 +37,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 				RequestCampanhaSubscriber subscriber = new RequestCampanhaSubscriber();
 				publisher.subscribe(subscriber);
 			
-
+				publisher.close();
 
 		} else {
 
@@ -54,6 +50,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			RequestCampanhaSubscriber subscriber = new RequestCampanhaSubscriber();
 			publisher.subscribe(subscriber);
 
+			publisher.close();
 			// gera a response
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
 			cadastrarSocioTorcedorResponse.setCampanhas(socioTorcedor.getTimeCoracao().getCampanhasAssociadas());
@@ -79,7 +76,8 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		socioTorcedorRepository.save(socio);
 	}
 	
-	private SocioTorcedor atualizarCampanhas(SocioTorcedor socio, List<Campanha> campanhas) {
+	@Override
+	public SocioTorcedor atualizarCampanhas(SocioTorcedor socio, List<Campanha> campanhas) {
 
 		Set<Integer> ids = socio.getTimeCoracao().getCampanhasAssociadas().stream().map(Campanha::getIdCampanha)
 				.collect(Collectors.toSet());
