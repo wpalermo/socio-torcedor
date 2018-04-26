@@ -25,9 +25,6 @@ public class Campanha implements Serializable{
 	
 	private String nomeCampanha;
 	
-	@JsonBackReference
-	private TimeCoracao timeCoracao;
-	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataInicioVigencia;
 	
@@ -65,14 +62,6 @@ public class Campanha implements Serializable{
 	}
 	public void setDataFimVigencia(LocalDate dataFimVigencia) {
 		this.dataFimVigencia = dataFimVigencia;
-	}
-
-	public TimeCoracao getTimeCoracao() {
-		return timeCoracao;
-	}
-
-	public void setTimeCoracao(TimeCoracao timeCoracao) {
-		this.timeCoracao = timeCoracao;
 	}
 
 

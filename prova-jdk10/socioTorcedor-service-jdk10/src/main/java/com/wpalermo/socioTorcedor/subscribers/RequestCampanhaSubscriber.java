@@ -51,7 +51,7 @@ public class RequestCampanhaSubscriber implements Subscriber<SocioTorcedor>{
 
 	@Override
 	public void onError(Throwable throwable) {
-		logger.error("Erro ao adicionar registro");
+		logger.error("Erro ao acessar servico" + throwable.getMessage());
 	}
 
 	@Override

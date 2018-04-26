@@ -1,9 +1,9 @@
 package com.wpalermo.socioTorcedor.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 
-public interface SocioTorcedorRepository extends CrudRepository<SocioTorcedor, String>{
+public interface SocioTorcedorRepository extends MongoRepository<SocioTorcedor, String>{
 
 }

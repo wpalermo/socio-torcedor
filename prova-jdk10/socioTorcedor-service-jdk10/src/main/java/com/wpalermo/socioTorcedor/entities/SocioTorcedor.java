@@ -23,7 +23,6 @@ public class SocioTorcedor implements Serializable {
 	
 	private String nome;
 	
-	@JsonManagedReference
 	private TimeCoracao timeCoracao;
 	
 	public String getNome() {

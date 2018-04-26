@@ -24,12 +24,7 @@ public class TimeCoracao implements Serializable{
 	
 	private String nomeTimeCoracao;
 	
-	@JsonManagedReference
 	private List<Campanha> campanhasAssociadas;
-	
-	@JsonBackReference
-	private SocioTorcedor socioTorcedor;
-	
 	
 	public Integer getIdTimeCoracao() {
 		return idTimeCoracao;
@@ -49,12 +44,7 @@ public class TimeCoracao implements Serializable{
 	public void setCampanhasAssociadas(List<Campanha> campanhasAssociadas) {
 		this.campanhasAssociadas = campanhasAssociadas;
 	}
-	public SocioTorcedor getSocioTorcedor() {
-		return socioTorcedor;
-	}
-	public void setSocioTorcedor(SocioTorcedor socioTorcedor) {
-		this.socioTorcedor = socioTorcedor;
-	}
+
 	
 	
 	

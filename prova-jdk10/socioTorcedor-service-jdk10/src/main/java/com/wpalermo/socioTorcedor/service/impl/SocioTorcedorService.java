@@ -25,7 +25,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	@Autowired
 	private SocioTorcedorRepository socioTorcedorRepository;
 
-
+	@Autowired
+	private RestServers servers;
+	
 	@Override
 	public CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
 
@@ -42,14 +44,16 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		} else {
 
 			socioTorcedorRepository.save(socioTorcedor);
-
+			servers.getCampanhaUrl();
 
 			// Chamada de servico
 			
 			SubmissionPublisher<SocioTorcedor> publisher = new SubmissionPublisher<>();
 			RequestCampanhaSubscriber subscriber = new RequestCampanhaSubscriber();
 			publisher.subscribe(subscriber);
-
+			
+			publisher.submit(socioTorcedor);
+			
 			publisher.close();
 			// gera a response
 			CadastrarSocioTorcedorResponse cadastrarSocioTorcedorResponse = new CadastrarSocioTorcedorResponse();
