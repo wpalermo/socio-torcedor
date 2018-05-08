@@ -5,6 +5,7 @@ import java.util.concurrent.Flow.Subscription;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +14,7 @@ import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 
-@Service
+@Component
 public class RequestCampanhaSubscriber implements Subscriber<SocioTorcedor>{
 
 	Logger logger = Logger.getLogger(this.getClass());
@@ -47,6 +48,10 @@ public class RequestCampanhaSubscriber implements Subscriber<SocioTorcedor>{
 		final String URL = restServers.getCampanhaUrl() + "/campanha/timeCoracao/" + item.getTimeCoracao().getIdTimeCoracao();
 		this.socio = item;
 		response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+		
+		
+		 
+		
 	}
 
 	@Override

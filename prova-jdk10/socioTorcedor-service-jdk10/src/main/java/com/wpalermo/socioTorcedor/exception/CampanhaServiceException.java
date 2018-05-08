@@ -2,7 +2,7 @@ package com.wpalermo.socioTorcedor.exception;
 
 import com.wpalermo.socioTorcedor.utils.PersistenceDatailEnum;
 
-public class CampanhaServiceException extends RuntimeException {
+public class CampanhaServiceException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	
