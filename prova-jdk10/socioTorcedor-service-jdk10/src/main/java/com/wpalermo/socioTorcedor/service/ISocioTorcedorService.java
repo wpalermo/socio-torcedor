@@ -30,7 +30,5 @@ public interface ISocioTorcedorService {
 	
 	void atualizarCampanhas(SocioTorcedor socio);
 
-	SocioTorcedor atualizarCampanhas(SocioTorcedor socio, List<Campanha> campanhas);
-
 
 }

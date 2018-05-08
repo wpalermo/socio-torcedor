@@ -2,71 +2,90 @@ package com.wpalermo.socioTorcedor.service.impl;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
-import com.wpalermo.socioTorcedor.exception.CampanhaServiceException;
+import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
-import com.wpalermo.socioTorcedor.service.ICampanhaHttpRequest;
+import com.wpalermo.socioTorcedor.utils.SocioTorcedorUtils;
 
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
+import rx.Observable;
+import rx.schedulers.Schedulers;
 
-public class CampanhaHttpRequest implements ICampanhaHttpRequest {
+
+@Service
+public class CampanhaHttpRequest implements ICampanhaHttpRequest{
 
 	
 	@Autowired
 	private RestServers servers;
 	
+	@Autowired
+	private SocioTorcedorRepository socioTorcedorRepository;
+	
 	private ListaCampanhaResponse response;
 	
 	private RestTemplate restTemplate;
+	
+	private SocioTorcedor st;
+	
+
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 	
 	@Override
 	@HystrixCommand(fallbackMethod="serviceError")
-	public void requestCampanhas(SocioTorcedor socioTorcedor) {
+	public void callBack(SocioTorcedor socioTorcedor) {
 		
+		st = new SocioTorcedor();
+				
 		Observable.just(socioTorcedor)
 		  .subscribeOn(Schedulers.io())
-		  .doOnComplete(() -> {logger.info("URL lida com sucesso ");})
-		  .subscribe(socio -> callCampanha(socio),
+		  .doOnCompleted(() -> logger.info("Leitura feita com sucesso "))
+		  .subscribe(socio -> st = request(socio),
 				  	 Throwable::printStackTrace,
-				  	 () -> insereCampanhas());
-		
+				  	 () -> serviceSuccess(st));
 		
 	}
 	
-	
-	
-	
-	private ListaCampanhaResponse callCampanha(SocioTorcedor socioTorcedor) {
+	@Override
+	public SocioTorcedor request(SocioTorcedor socioTorcedor) {
 		
 		final String URL = servers.getCampanhaUrl() + "/campanha/timeCoracao/" + socioTorcedor.getTimeCoracao().getIdTimeCoracao();
-		//ListaCampanhaResponse response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+		this.response = restTemplate.getForObject(URL, ListaCampanhaResponse.class);
 		
-		ListaCampanhaResponse response = new ListaCampanhaResponse();
+		this.response = new ListaCampanhaResponse();
 		response.setMessage("FOII");
-		this.response = response;
-		return response;
 		
+
+		socioTorcedor = SocioTorcedorUtils.atualizarCampanhas(socioTorcedor, response.getCampanhas());
+		return socioTorcedor;
 		
 	}
-	
-	private void insereCampanhas() {
-		logger.info("insere " + this.response.getMessage());
-	}
-
-
 
 
 	@Override
-	public void serviceError() {
-		logger.error("Erro ao chamar servico de campanha");
+	public void serviceSuccess(SocioTorcedor socioTorcedor) {
+		logger.info("insere " + this.response.getMessage());		
+		
+		socioTorcedorRepository.save(socioTorcedor);
 	}
+	
+	@Override
+	public void serviceError(SocioTorcedor socioTorcedor, Throwable throwable) {
+		logger.error("Erro ao chamar servico de campanha" + throwable.getMessage());
+	}
+
+
+
+
+
+
+
+
 	
 
 }
