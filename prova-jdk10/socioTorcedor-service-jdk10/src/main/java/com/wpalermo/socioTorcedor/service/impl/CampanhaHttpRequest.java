@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
@@ -41,13 +42,15 @@ public class CampanhaHttpRequest implements ICampanhaHttpRequest{
 	public void callBack(SocioTorcedor socioTorcedor) {
 		
 		st = new SocioTorcedor();
+		
+		
 				
-		Observable.just(socioTorcedor)
-		  .subscribeOn(Schedulers.io())
-		  .doOnCompleted(() -> logger.info("Leitura feita com sucesso "))
-		  .subscribe(socio -> st = request(socio),
-				  	 Throwable::printStackTrace,
-				  	 () -> serviceSuccess(st));
+//		Observable.just(socioTorcedor)
+//		  .subscribeOn(Schedulers.io())
+//		  .doOnCompleted(() -> logger.info("Leitura feita com sucesso "))
+//		  .subscribe(socio -> st = request(socio),
+//				  	 Throwable::printStackTrace,
+//				  	 () -> serviceSuccess(st));
 		
 	}
 	
