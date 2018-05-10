@@ -28,7 +28,7 @@ public class SocioTorcedorController {
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<CadastrarSocioTorcedorResponse> post(RequestEntity<SocioTorcedor> request){
+	public ResponseEntity<SocioTorcedor> post(RequestEntity<SocioTorcedor> request){
 		return new ResponseEntity<>(socioTorcedorService.cadastrarSocioTorcedor(request.getBody()), HttpStatus.CREATED);
 	}
 	

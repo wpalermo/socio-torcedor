@@ -1,8 +1,7 @@
 package com.wpalermo.socioTorcedor.service.impl;
 
-import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
-import com.wpalermo.socioTorcedor.service.IRestRequest;
+import com.netflix.hystrix.HystrixCommandKey;
 
-public interface ICampanhaHttpRequest extends IRestRequest<SocioTorcedor> {
+public interface ICampanhaHttpRequest {
 
 }

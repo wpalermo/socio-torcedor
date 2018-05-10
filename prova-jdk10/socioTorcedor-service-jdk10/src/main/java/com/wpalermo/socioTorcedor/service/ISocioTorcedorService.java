@@ -17,7 +17,7 @@ public interface ISocioTorcedorService {
 	 * @throws SocioTorcedorException
 	 * @throws PersistenceException
 	 */
-	CadastrarSocioTorcedorResponse cadastrarSocioTorcedor(SocioTorcedor socioTorcedor);
+	SocioTorcedor cadastrarSocioTorcedor(SocioTorcedor socioTorcedor);
 
 	/**
 	 * Busca um socio torcedor pelo seu email
