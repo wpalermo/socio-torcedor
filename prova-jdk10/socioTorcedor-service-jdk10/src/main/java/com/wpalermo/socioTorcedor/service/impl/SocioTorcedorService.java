@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
@@ -19,6 +20,9 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	@Autowired
 	private SocioTorcedorRepository socioTorcedorRepository;
 	
+	@Autowired
+	private RestServers servers;
+	
 	private ListaCampanhaResponse response;
 
 
@@ -27,7 +31,10 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		
 		logger.info("Cadastrando socio torcedor");
 		
-		CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest("");
+		final String URL = servers.getCampanhaUrl() + "/campanha/timeCoracao/" + socioTorcedor.getTimeCoracao().getIdTimeCoracao();
+
+		
+		CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest(URL);
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 			
