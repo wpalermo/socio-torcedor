@@ -1,17 +1,19 @@
 package com.wpalermo.socioTorcedor.service.impl;
 
+import java.util.ArrayList;
+
 import org.jboss.logging.Logger;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
-import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
+import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.utils.HystrixKeyEnum;
 
-
-@Service
-public class CampanhaHttpRequest extends HystrixCommand<ListaCampanhaResponse> implements ICampanhaHttpRequest{
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class CampanhaHttpRequest extends HystrixCommand<ResponseEntity<ArrayList<Campanha>>> {
 
 	
 	private Logger logger = Logger.getLogger(this.getClass());
@@ -29,20 +31,16 @@ public class CampanhaHttpRequest extends HystrixCommand<ListaCampanhaResponse> i
 	
 	
 	@Override
-	protected ListaCampanhaResponse run() throws Exception {
+	protected ResponseEntity run() throws Exception {
 		logger.info("Fazendo requisicao para " + URL);
-		return restTemplate.getForObject(URL, ListaCampanhaResponse.class);
+		return restTemplate.getForObject(URL, ResponseEntity.class);
 	}
-	
-	
 	
 
 	@Override
-	protected ListaCampanhaResponse getFallback() {
+	protected ResponseEntity getFallback() {
 		logger.info("Problema ao acessar servico de campanhas " + URL);
-		ListaCampanhaResponse returnable = new ListaCampanhaResponse();
-		returnable.setErro("Problema ao acessar servico de campanhas");
-		
+		ResponseEntity returnable = new ResponseEntity("Erro ao acessar campanha", HttpStatus.EXPECTATION_FAILED);
 		return returnable;
 	}
 	

@@ -5,6 +5,8 @@ import java.util.Arrays;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
@@ -12,6 +14,8 @@ import org.springframework.context.annotation.PropertySource;
 
 @PropertySource(value="file:./application.yml ")
 @SpringBootApplication
+@EnableCircuitBreaker
+@EnableHystrixDashboard
 public class Application {
 
     public static void main(String[] args) {
@@ -33,8 +37,5 @@ public class Application {
         };
     }
     
-    
-    
-
 
 }
