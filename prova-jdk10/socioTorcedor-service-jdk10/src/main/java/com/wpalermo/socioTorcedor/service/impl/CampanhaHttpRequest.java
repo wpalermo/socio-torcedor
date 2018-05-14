@@ -1,7 +1,6 @@
 package com.wpalermo.socioTorcedor.service.impl;
 
 import org.jboss.logging.Logger;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.HystrixCommand;
@@ -10,7 +9,6 @@ import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.utils.HystrixKeyEnum;
 
 
-@Service
 public class CampanhaHttpRequest extends HystrixCommand<ListaCampanhaResponse> implements ICampanhaHttpRequest{
 
 	

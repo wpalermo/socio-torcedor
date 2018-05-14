@@ -49,10 +49,10 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 			socioTorcedorRepository.save(socioTorcedor);
 
 			campanhaHttpRequest.toObservable()
-			   .subscribeOn(Schedulers.io())
-			   .subscribe(returned -> response = returned,
-					   	  Throwable::printStackTrace,
-					   	  () -> atualizarCampanhas(socioTorcedor, response));		
+							   .subscribeOn(Schedulers.io())
+							   .subscribe(returned -> response = returned,
+									   	  Throwable::printStackTrace,
+									   	  () -> atualizarCampanhas(socioTorcedor, response));		
 		}
 		
 		
