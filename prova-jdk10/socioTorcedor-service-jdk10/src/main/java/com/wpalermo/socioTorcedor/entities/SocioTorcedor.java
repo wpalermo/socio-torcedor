@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 /**
  * Entidade responsavel pela tabela de socio torcedor
@@ -19,7 +17,7 @@ public class SocioTorcedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String email;
+	private String email;	
 	
 	private String nome;
 	

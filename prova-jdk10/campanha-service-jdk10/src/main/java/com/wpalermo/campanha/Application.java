@@ -9,9 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
 
 
 @PropertySource(value="file:./application.yml")

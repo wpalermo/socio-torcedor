@@ -20,10 +20,6 @@ import com.wpalermo.campanha.request.CampanhaRequest;
 import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ICampanhaService;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/campanha")
@@ -36,10 +32,6 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 
 	@Override
 
-	@ApiOperation(value = "Cadastrar uma nova pessoa", response = CampanhaResponse.class, notes = "Essa operação salva um novo registro com as informações de pessoa.")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna um ResponseModel com uma mensagem de sucesso", response = CampanhaResponse.class),
-			@ApiResponse(code = 500, message = "Caso tenhamos algum erro vamos retornar um ResponseModel com a Exception", response = CampanhaResponse.class)
-	})
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseStatus(value = HttpStatus.OK)

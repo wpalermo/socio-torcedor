@@ -12,11 +12,7 @@ import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
-import com.wpalermo.socioTorcedor.requests.CampanhaHttpRequest;
-import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
-
-import rx.schedulers.Schedulers;
 
 @Service
 public class SocioTorcedorService implements ISocioTorcedorService {
@@ -39,25 +35,25 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		final String URL = servers.getCampanhaUrl() + "/campanha/timeCoracao/" + socioTorcedor.getTimeCoracao().getIdTimeCoracao();
 
 		
-		CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest(URL);
+		//CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest(URL);
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 			
-			campanhaHttpRequest.toObservable()
- 							   .subscribeOn(Schedulers.io())
- 							   .subscribe(returned -> response = returned,
- 								   	  Throwable::printStackTrace,
- 								   	  () -> atualizarCampanhas(socioTorcedor, response));
+//			campanhaHttpRequest.toObservable()
+// 							   .subscribeOn(Schedulers.io())
+// 							   .subscribe(returned -> response = returned,
+// 								   	  Throwable::printStackTrace,
+// 								   	  () -> atualizarCampanhas(socioTorcedor, response));
 
 		} else {
 			
 			socioTorcedorRepository.save(socioTorcedor);
 
-			campanhaHttpRequest.toObservable()
-							   .subscribeOn(Schedulers.io())
-							   .subscribe(returned -> response = returned,
-									   	  Throwable::printStackTrace,
-									   	  () -> atualizarCampanhas(socioTorcedor, response));		
+//			campanhaHttpRequest.toObservable()
+//							   .subscribeOn(Schedulers.io())
+//							   .subscribe(returned -> response = returned,
+//									   	  Throwable::printStackTrace,
+//									   	  () -> atualizarCampanhas(socioTorcedor, response));		
 		}
 		
 		

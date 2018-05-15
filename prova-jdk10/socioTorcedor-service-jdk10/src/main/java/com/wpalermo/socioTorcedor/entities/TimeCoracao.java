@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 /**
  * Entidade responsavel pela tabela de time do coracao
  * 
