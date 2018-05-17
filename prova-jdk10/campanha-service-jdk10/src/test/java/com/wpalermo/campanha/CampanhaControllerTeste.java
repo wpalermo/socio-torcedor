@@ -87,7 +87,6 @@ public class CampanhaControllerTeste {
 		campanha.setNomeCampanha("Natal");
 		campanhas.add(campanha);
 
-		campanhas.forEach(Campanha::atualizarIdCampanha);
 		
 		campanhaRequest.setCampanhas(campanhas);
 		

@@ -1,9 +1,12 @@
 package com.wpalermo.campanha.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,44 +15,43 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author william.palermo
  *
  */
+@Entity
+public class Campanha implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
-@Document(collection = "campanha")
-public class Campanha {
-	
 	@Id
-	private String idCampanha;
+	@GeneratedValue
+	private Integer idCampanha;
 	
+	@Column
 	private String nomeCampanha;
 	
+	@Column
 	private Integer idTimeCoracao;
 	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataInicioVigencia;
 	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataFimVigencia;
 	
+
+	
 	
 	public Campanha() {
+		
 	}
 
-
-	public String getIdCampanha() {
+	public Integer getIdCampanha() {
 		return idCampanha;
 	}
-
-
-	public void setIdCampanha(String idCampanha) {
-		this.idCampanha = idCampanha;
+	public void setIdCampanha(Integer idCampanha) {
+		this.idCampanha = idCampanha; 
 	}
 
-
-	public Integer getIdTimeCoracao() {
-		return idTimeCoracao;
-	}
-	public void setIdTimeCoracao(Integer idTimeCoracao) {
-		this.idTimeCoracao = idTimeCoracao;
-	}
 	public String getNomeCampanha() {
 		return nomeCampanha;
 	}
@@ -69,10 +71,14 @@ public class Campanha {
 		this.dataFimVigencia = dataFimVigencia;
 	}
 
-	
-	public void atualizarIdCampanha() {
-		this.idCampanha  = getNomeCampanha() + getDataFimVigencia().toString();
+	public Integer getIdTimeCoracao() {
+		return idTimeCoracao;
 	}
+
+	public void setIdTimeCoracao(Integer idTimeCoracao) {
+		this.idTimeCoracao = idTimeCoracao;
+	}
+	
 
 	
 	

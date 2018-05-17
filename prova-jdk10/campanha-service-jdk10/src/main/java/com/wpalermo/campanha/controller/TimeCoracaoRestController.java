@@ -43,7 +43,7 @@ public class TimeCoracaoRestController implements RestResource<CampanhaResponse,
 	}
 
 	@Override
-	public ResponseEntity<CampanhaResponse> put(String id, RequestEntity<CampanhaRequest> request) {
+	public ResponseEntity<CampanhaResponse> put(Integer id, RequestEntity<CampanhaRequest> request) {
 		return null;
 	}
 

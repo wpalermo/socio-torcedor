@@ -3,8 +3,13 @@ package com.wpalermo.socioTorcedor.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -15,18 +20,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  * @author william.palermo
  *
  */
+@Entity
 public class Campanha implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private Integer idCampanha;
 	
+	@Column
 	private String nomeCampanha;
 	
+	@JsonBackReference
+	@ManyToOne
+	private TimeCoracao timeCoracao;
+	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataInicioVigencia;
 	
+	@Column
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "pt-BR", timezone = "Brazil/East")
 	private LocalDate dataFimVigencia;
 	
@@ -63,10 +77,13 @@ public class Campanha implements Serializable{
 		this.dataFimVigencia = dataFimVigencia;
 	}
 
+	public TimeCoracao getTimeCoracao() {
+		return timeCoracao;
+	}
 
+	public void setTimeCoracao(TimeCoracao timeCoracao) {
+		this.timeCoracao = timeCoracao;
+	}
 
-
-	
-	
 
 }
