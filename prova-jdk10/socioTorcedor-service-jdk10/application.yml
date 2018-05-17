@@ -6,6 +6,13 @@ campanha:
   ip: http://localhost
   port: 8082
 
-  
+spring:
+  datasource:
+    generate-unique-name: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+ 
 
  

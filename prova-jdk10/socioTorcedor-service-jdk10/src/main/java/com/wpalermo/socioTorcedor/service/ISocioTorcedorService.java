@@ -1,6 +1,6 @@
 package com.wpalermo.socioTorcedor.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
@@ -29,7 +29,7 @@ public interface ISocioTorcedorService {
 	SocioTorcedor buscarSocioTorcedor(String email);
 	
 	
-	void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<ArrayList<Campanha>> reponse);
+	void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<List<Campanha>> reponse);
 
 
 }

@@ -1,5 +1,7 @@
 package com.wpalermo.campanha.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.request.CampanhaRequest;
 import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ITimeCoracaoService;
@@ -20,39 +23,35 @@ import com.wpalermo.campanha.service.ITimeCoracaoService;
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/campanha/timeCoracao/{idTimeCoracao}")
-public class TimeCoracaoRestController implements RestResource<CampanhaResponse, CampanhaRequest> {
+public class TimeCoracaoRestController {
 	
 	@Autowired
 	private ITimeCoracaoService timeCoracaoService;
 	
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces= {"application/json"})
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<CampanhaResponse> getByTimeCoracao(@PathVariable Integer idTimeCoracao){
+	public ResponseEntity<List<Campanha>> getByTimeCoracao(@PathVariable Integer idTimeCoracao){
 		
 		CampanhaResponse response = new CampanhaResponse();
 		response.setCampanhas(timeCoracaoService.findById(idTimeCoracao));
 		
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response.getCampanhas(), HttpStatus.OK);
 	}
 
-	@Override
 	public ResponseEntity<CampanhaResponse> get() {
 		return null;
 	}
 
-	@Override
 	public ResponseEntity<CampanhaResponse> put(Integer id, RequestEntity<CampanhaRequest> request) {
 		return null;
 	}
 
-	@Override
 	public ResponseEntity<CampanhaResponse> post(RequestEntity<CampanhaRequest> request) {
 		return null;
 	}
 
-	@Override
 	public void delete(String request) {
 		
 	}

@@ -1,5 +1,7 @@
 package com.wpalermo.campanha.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,29 +25,26 @@ import com.wpalermo.campanha.service.ICampanhaService;
 @Controller
 @CrossOrigin(origins = "*")
 @RequestMapping("/campanha")
-public class CampanhaRestController implements RestResource<CampanhaResponse, CampanhaRequest> {
+public class CampanhaRestController  {
 
 	protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private ICampanhaService campanhaService;
 
-	@Override
 
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET, produces= {"application/json"})
 	@ResponseStatus(value = HttpStatus.OK)
-	@ResponseBody
-	public ResponseEntity<CampanhaResponse> get() {
+	public @ResponseBody ResponseEntity<List<Campanha>> get() {
 
 		CampanhaResponse campanha = new CampanhaResponse();
 		campanha.setCampanhas(campanhaService.getAll());
 
-		return new ResponseEntity<CampanhaResponse>(campanha, HttpStatus.OK);
+		return new ResponseEntity<>(campanha.getCampanhas(), HttpStatus.OK);
 
 	}
 
-	@Override
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
@@ -59,7 +58,6 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@Override
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@ResponseBody
@@ -87,7 +85,6 @@ public class CampanhaRestController implements RestResource<CampanhaResponse, Ca
 
 	}
 
-	@Override
 	@RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody

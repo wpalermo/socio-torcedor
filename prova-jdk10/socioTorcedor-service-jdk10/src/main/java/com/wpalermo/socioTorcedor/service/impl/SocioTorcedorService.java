@@ -1,6 +1,6 @@
 package com.wpalermo.socioTorcedor.service.impl;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	@Autowired
 	private RestServers servers;
 	
-	private ResponseEntity<ArrayList<Campanha>> response;
+	private ResponseEntity<List<Campanha>> response;
 
 	@Override
 	public SocioTorcedor cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
@@ -42,13 +42,21 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 
 		if (socioTorcedorRepository.existsById(socioTorcedor.getEmail())) {
 
-			campanhaHttpRequest.toObservable().subscribeOn(Schedulers.io()).subscribe(returned -> response = returned, Throwable::printStackTrace, () -> atualizarCampanhas(socioTorcedor, response));
+			campanhaHttpRequest.toObservable()
+							   .subscribeOn(Schedulers.io())
+							   .subscribe(returned -> response = returned, 
+							   			  Throwable::printStackTrace, 
+							   			  () -> atualizarCampanhas(socioTorcedor, response));
 
 		} else {
 
 			socioTorcedorRepository.save(socioTorcedor);
 
-			campanhaHttpRequest.toObservable().subscribeOn(Schedulers.io()).subscribe(returned -> response = returned, Throwable::printStackTrace,									   	  () -> atualizarCampanhas(socioTorcedor, response));		
+			campanhaHttpRequest.toObservable()
+							   .subscribeOn(Schedulers.io())
+							   .subscribe(returned -> response = returned, 
+							   		      Throwable::printStackTrace,
+							   		      () -> atualizarCampanhas(socioTorcedor, response));		
 		}
 		
 		
@@ -61,10 +69,15 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	}
 
 	@Override
-	public void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<ArrayList<Campanha>> reponse) {
+	public void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<List<Campanha>> reponse) {
+		
 		if(response.getStatusCode().equals(HttpStatus.OK)) {
-			socio.getTimeCoracao().setCampanhasAssociadas(response.getBody());			
-			socioTorcedorRepository.save(socio);
+			if(response.getBody().isEmpty())
+				logger.info("Nenhuma campanha encontrada para o time do coracao " + socio.getTimeCoracao().getNomeTimeCoracao());
+			else {
+				socio.getTimeCoracao().setCampanhasAssociadas(response.getBody());			
+				socioTorcedorRepository.save(socio);
+			}
 		}else
 			logger.error(response.getBody());
 		
