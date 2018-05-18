@@ -49,8 +49,6 @@ public class SocioTorcedorControllerTest {
 	@Test
 	public void testPost() {
 		
-		
-		
 		TimeCoracao timeCoracao = new TimeCoracao();
 		timeCoracao.setIdTimeCoracao(1);
 		timeCoracao.setNomeTimeCoracao("Sao Paulo Futebol Clube");

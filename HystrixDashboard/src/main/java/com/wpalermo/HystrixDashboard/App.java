@@ -10,7 +10,6 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
  *
  */
 @SpringBootApplication
-@EnableCircuitBreaker
 @EnableHystrixDashboard
 public class App 
 {
