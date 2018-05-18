@@ -1,11 +1,13 @@
-package com.wpalermo.EurekaServer;
+package com.wpalermo.eurekaService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.PropertySource;
 
+@PropertySource(value="file:./application.yml ")
+@EnableEurekaServer
 @SpringBootApplication
-@PropertySource(value="file:./application.yml")
 public class EurekaServiceApplication {
 
     public static void main(String[] args) {
