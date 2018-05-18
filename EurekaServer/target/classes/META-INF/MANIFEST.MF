@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: EurekaServer
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: paler
+Built-By: william.palermo
 Implementation-Vendor-Id: com.wpalermo
 Build-Jdk: 1.8.0_171
 Implementation-URL: http://maven.apache.org
