@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wpalermo</groupId>
-	<artifactId>HystrixDashboard</artifactId>
+	<artifactId>histrix-dashboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>HystrixDashboard</name>
+	<name>histrix-dashboard</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
