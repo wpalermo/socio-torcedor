@@ -3,6 +3,9 @@ server:
 spring:
   datasource:
     generate-unique-name: true
+  application:
+    name: campanha-service
+  
 
 eureka: 
   client:
