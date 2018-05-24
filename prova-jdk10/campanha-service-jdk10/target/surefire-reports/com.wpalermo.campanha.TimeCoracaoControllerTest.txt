@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.wpalermo.campanha.TimeCoracaoControllerTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 30.95 s <<< FAILURE! - in com.wpalermo.campanha.TimeCoracaoControllerTest
+testGetByTimeCoracao(com.wpalermo.campanha.TimeCoracaoControllerTest)  Time elapsed: 30.936 s  <<< ERROR!
+org.springframework.web.client.HttpServerErrorException: 500 null
+	at com.wpalermo.campanha.TimeCoracaoControllerTest.setUp(TimeCoracaoControllerTest.java:90)
+
