@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: socioTorcedor-service-jdk10
+Implementation-Title: socioTorcedor-service
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: paler
 Implementation-Vendor-Id: com.wpalermo

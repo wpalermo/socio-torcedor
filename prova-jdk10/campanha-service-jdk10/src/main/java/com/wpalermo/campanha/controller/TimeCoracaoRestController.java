@@ -32,12 +32,12 @@ public class TimeCoracaoRestController {
 	@RequestMapping(method = RequestMethod.GET, produces= {"application/json"})
 	@ResponseStatus(value = HttpStatus.OK)
 	@ResponseBody
-	public ResponseEntity<List<Campanha>> getByTimeCoracao(@PathVariable Integer idTimeCoracao){
+	public ResponseEntity<CampanhaResponse> getByTimeCoracao(@PathVariable Integer idTimeCoracao){
 		
 		CampanhaResponse response = new CampanhaResponse();
 		response.setCampanhas(timeCoracaoService.findById(idTimeCoracao));
 		
-		return new ResponseEntity<>(response.getCampanhas(), HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	public ResponseEntity<CampanhaResponse> get() {

@@ -6,12 +6,15 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.wpalermo</groupId>
-		<artifactId>prova-jdk10</artifactId>
+		<artifactId>assinatura</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>campanha-service-jdk10</artifactId>
-	<name>campanha-service-jdk10</name>
+
+	<artifactId>socioTorcedor-service</artifactId>
+	<name>socioTorcedor-service</name>
 	<url>http://maven.apache.org</url>
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -29,8 +32,8 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<dependencies>
 
+	<dependencies>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -43,6 +46,8 @@
 		</dependency>
 
 
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId> 
+			<scope>test</scope> </dependency> -->
 
 
 	</dependencies>

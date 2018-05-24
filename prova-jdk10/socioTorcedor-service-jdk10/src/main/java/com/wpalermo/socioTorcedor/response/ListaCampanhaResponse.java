@@ -15,6 +15,10 @@ public class ListaCampanhaResponse implements Serializable{
 	private String message;
 	private String erro;
 	
+	public ListaCampanhaResponse() {
+		
+	}
+	
 	
 	public List<Campanha> getCampanhas() {
 		return campanhas;

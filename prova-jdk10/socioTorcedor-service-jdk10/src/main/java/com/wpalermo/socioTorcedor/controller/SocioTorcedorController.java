@@ -20,7 +20,6 @@ import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 @RequestMapping("/socioTorcedor")
 public class SocioTorcedorController {
 
-	
 	@Autowired
 	private ISocioTorcedorService socioTorcedorService;
 	

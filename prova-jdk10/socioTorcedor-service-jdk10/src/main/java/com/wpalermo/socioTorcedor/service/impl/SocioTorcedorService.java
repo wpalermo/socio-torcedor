@@ -1,7 +1,5 @@
 package com.wpalermo.socioTorcedor.service.impl;
 
-import java.util.List;
-
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
-import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
 import com.wpalermo.socioTorcedor.requests.CampanhaHttpRequest;
+import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 
 import rx.schedulers.Schedulers;
@@ -25,10 +23,13 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	@Autowired
 	private SocioTorcedorRepository socioTorcedorRepository;
 	
+	//@Autowired
+	//private ICampanhaFeignController campanha;
+	
 	@Autowired
 	private RestServers servers;
 	
-	private ResponseEntity<List<Campanha>> response;
+	private ResponseEntity<ListaCampanhaResponse> response;
 
 	@Override
 	public SocioTorcedor cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
@@ -36,6 +37,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		logger.info("Cadastrando socio torcedor");
 		
 		final String URL = servers.getCampanhaUrl() + "/campanha/timeCoracao/" + socioTorcedor.getTimeCoracao().getIdTimeCoracao();
+		//List<Campanha> camapanhas = campanha.get();
 
 		
 		CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest(URL);
@@ -69,14 +71,17 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	}
 
 	@Override
-	public void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<List<Campanha>> reponse) {
+	public void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<ListaCampanhaResponse> reponse) {
+		
 		
 		if(response.getStatusCode().equals(HttpStatus.OK)) {
-			if(response.getBody().isEmpty())
+			if(response.getBody() == null)
 				logger.info("Nenhuma campanha encontrada para o time do coracao " + socio.getTimeCoracao().getNomeTimeCoracao());
 			else {
-				socio.getTimeCoracao().setCampanhasAssociadas(response.getBody());			
+				
+				socio.getTimeCoracao().setCampanhasAssociadas(response.getBody().getCampanhas());			
 				socioTorcedorRepository.save(socio);
+				logger.info("Novas campanhas adicionadas com sucesso");
 			}
 		}else
 			logger.error(response.getBody());
@@ -84,6 +89,7 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 		
 		
 	}
+
 
 
 

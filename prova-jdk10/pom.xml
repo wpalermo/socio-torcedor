@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.wpalermo</groupId>
-	<artifactId>prova-jdk10</artifactId>
+	<artifactId>assinatura</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>prova-jdk10</name>
+	<name>assinatura</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -158,7 +158,7 @@
 
 
 	<modules>
-		<module>campanha-service-jdk10</module>
-		<module>socioTorcedor-service-jdk10</module>
+		<module>campanha-service</module>
+		<module>socioTorcedor-service</module>
 	</modules>
 </project>

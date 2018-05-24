@@ -1,7 +1,5 @@
 package com.wpalermo.socioTorcedor.requests;
 
-import java.util.List;
-
 import org.jboss.logging.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,13 +7,14 @@ import org.springframework.web.client.RestTemplate;
 
 import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
-import com.wpalermo.socioTorcedor.entities.Campanha;
+import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 import com.wpalermo.socioTorcedor.utils.HystrixKeyEnum;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class CampanhaHttpRequest extends HystrixCommand<ResponseEntity<List<Campanha>>> {
+public class CampanhaHttpRequest extends HystrixCommand<ResponseEntity<ListaCampanhaResponse>> {
 
 	private Logger logger = Logger.getLogger(this.getClass());
+	
 
 	private RestTemplate restTemplate;
 
@@ -28,9 +27,9 @@ public class CampanhaHttpRequest extends HystrixCommand<ResponseEntity<List<Camp
 	}
 
 	@Override
-	protected ResponseEntity<List<Campanha>> run() throws Exception {
+	protected ResponseEntity<ListaCampanhaResponse> run() throws Exception {
 		logger.info("Fazendo requisicao para " + URL);
-		return new ResponseEntity(restTemplate.getForObject(URL, List.class),  HttpStatus.OK);
+		return new ResponseEntity(restTemplate.getForObject(URL, ListaCampanhaResponse.class),  HttpStatus.OK);
 	}
 
 	@Override

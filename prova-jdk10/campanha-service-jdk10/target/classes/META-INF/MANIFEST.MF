@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Implementation-Title: campanha-service-jdk10
+Implementation-Title: campanha-service
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: paler
 Implementation-Vendor-Id: com.wpalermo
