@@ -1,13 +1,9 @@
 package com.wpalermo.socioTorcedor.service;
 
-import java.util.List;
-
-import org.springframework.http.ResponseEntity;
-
+import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
 import com.wpalermo.socioTorcedor.exception.SocioTorcedorException;
-import com.wpalermo.socioTorcedor.response.ListaCampanhaResponse;
 
 public interface ISocioTorcedorService {
 	
@@ -29,7 +25,7 @@ public interface ISocioTorcedorService {
 	SocioTorcedor buscarSocioTorcedor(String email);
 	
 	
-	void atualizarCampanhas(SocioTorcedor socio, ResponseEntity<ListaCampanhaResponse> reponse);
+	void atualizarCampanhas(SocioTorcedor socio, Campanha campanhaResponse);
 
 
 }

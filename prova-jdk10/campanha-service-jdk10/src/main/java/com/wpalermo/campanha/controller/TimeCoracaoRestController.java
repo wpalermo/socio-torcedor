@@ -1,7 +1,5 @@
 package com.wpalermo.campanha.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.wpalermo.campanha.entities.Campanha;
 import com.wpalermo.campanha.request.CampanhaRequest;
 import com.wpalermo.campanha.response.CampanhaResponse;
 import com.wpalermo.campanha.service.ITimeCoracaoService;
