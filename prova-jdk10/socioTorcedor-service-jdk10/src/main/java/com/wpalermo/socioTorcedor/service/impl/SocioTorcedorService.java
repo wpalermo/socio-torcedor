@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.wpalermo.socioTorcedor.config.RestServers;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
+import com.wpalermo.socioTorcedor.hystrixCommands.CampanhaHttpRequest;
 import com.wpalermo.socioTorcedor.repository.SocioTorcedorRepository;
-import com.wpalermo.socioTorcedor.requests.CampanhaHttpRequest;
 import com.wpalermo.socioTorcedor.resources.CampanhaResource;
 import com.wpalermo.socioTorcedor.service.ISocioTorcedorService;
 
@@ -28,21 +27,12 @@ public class SocioTorcedorService implements ISocioTorcedorService {
 	@Autowired
 	private CampanhaResource campanhaResource;
 	
-	@Autowired
-	private RestServers servers;
-	
 	private List<Campanha> response;
 	
-	private Campanha campanhaResponse;
-
 	@Override
 	public SocioTorcedor cadastrarSocioTorcedor(SocioTorcedor socioTorcedor) {
 		
 		logger.info("Cadastrando socio torcedor");
-		
-		final String URL = servers.getCampanhaUrl() + "/campanha/timeCoracao/" + socioTorcedor.getTimeCoracao().getIdTimeCoracao();
-		//List<Campanha> camapanhas = campanhaResource.get();
-
 		
 		CampanhaHttpRequest campanhaHttpRequest = new CampanhaHttpRequest(campanhaResource);
 

@@ -1,4 +1,4 @@
-package com.wpalermo.socioTorcedor.requests;
+package com.wpalermo.socioTorcedor.hystrixCommands;
 
 import java.util.List;
 
