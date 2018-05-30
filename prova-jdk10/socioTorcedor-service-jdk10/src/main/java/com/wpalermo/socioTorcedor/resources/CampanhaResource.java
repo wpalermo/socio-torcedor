@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.wpalermo.socioTorcedor.entities.Campanha;
 
 @FeignClient(name = "campanha-service")
-public interface CampanhaResouce{
+public interface CampanhaResource{
 
 	@RequestMapping(method = RequestMethod.GET, value = "campanha")
 	List<Campanha> get();

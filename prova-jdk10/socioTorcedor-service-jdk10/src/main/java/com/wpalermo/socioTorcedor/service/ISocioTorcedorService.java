@@ -1,5 +1,7 @@
 package com.wpalermo.socioTorcedor.service;
 
+import java.util.List;
+
 import com.wpalermo.socioTorcedor.entities.Campanha;
 import com.wpalermo.socioTorcedor.entities.SocioTorcedor;
 import com.wpalermo.socioTorcedor.exception.PersistenceException;
@@ -25,7 +27,7 @@ public interface ISocioTorcedorService {
 	SocioTorcedor buscarSocioTorcedor(String email);
 	
 	
-	void atualizarCampanhas(SocioTorcedor socio, Campanha campanhaResponse);
+	void atualizarCampanhas(SocioTorcedor socio, List<Campanha> campanhaResponse);
 
 
 }
