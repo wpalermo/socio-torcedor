@@ -1,0 +1,28 @@
+{
+  "name": "node-gateway",
+  "version": "1.0.0",
+  "description": "node gateway para socio torcedor",
+  "main": "index.js",
+  "dependencies": {
+    "request": "^2.87.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wpalermo/socio-torcedor.git"
+  },
+  "keywords": [
+    "node",
+    "gateway",
+    "api"
+  ],
+  "author": "William Palermo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wpalermo/socio-torcedor/issues"
+  },
+  "homepage": "https://github.com/wpalermo/socio-torcedor#readme"
+}
