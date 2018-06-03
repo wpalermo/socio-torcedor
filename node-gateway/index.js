@@ -2,15 +2,18 @@
 
 var express = require('express');
 var app = express();
-var port = process.env.port || 9091;
+var port = process.env.port || 9090;
 
 
 
-var campanha = require('./app/routes/campanha-routes.js');
+var campanhaRoutes = require('./app/routes/campanha.routes.js');
+var socioRoutes = require('./app/routes/socioTorcedor.routes.js');
 
-//campanha.get();
+app.use(campanhaRoutes);
+app.use(socioRoutes);
+
 
 
 app.listen(port);
 
-
+console.log('online @ localhost:' + port);
