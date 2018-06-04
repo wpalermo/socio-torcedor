@@ -9,6 +9,7 @@ var port = process.env.port || 9090;
 var campanhaRoutes = require('./app/routes/campanha.routes.js');
 var socioRoutes = require('./app/routes/socioTorcedor.routes.js');
 
+//ADICINANDO ROTAS NA APLICACAO
 app.use(campanhaRoutes);
 app.use(socioRoutes);
 
