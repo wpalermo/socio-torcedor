@@ -4,6 +4,7 @@
   "description": "node gateway para socio torcedor",
   "main": "index.js",
   "dependencies": {
+    "eureka-js-client": "^4.4.1",
     "express": "^4.16.3",
     "request": "^2.87.0"
   },
