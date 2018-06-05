@@ -9,12 +9,12 @@
 		<artifactId>assinatura</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>campanha-service</artifactId>
 	<name>campanha-service</name>
 	<url>http://maven.apache.org</url>
-	
-	
+
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -35,10 +35,10 @@
 	<dependencies>
 
 
-<!-- 		<dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency> -->
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

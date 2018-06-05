@@ -9,34 +9,15 @@ var eureka = require('eureka-js-client').Eureka;
 
 var campanhaRoutes = require('./app/routes/campanha.routes.js');
 var socioRoutes = require('./app/routes/socioTorcedor.routes.js');
+var eureka = require('./app/config/eureka.js');
 
-
-var client = new eureka({
-    instance: {
-        app: 'node-gateway',
-        hostName: 'localhost',
-        ipAddr: '127.0.0.1',
-        port: 8080,
-        vipAddress: 'assinatura.com',
-        dataCenterInfo: {
-          name: 'wpalermo',
-        },
-      },
-
-    eureka: {
-        host: 'localhost',
-        port: 8761
-    }
-});
-
-client.start();
 
 
 //ADICINANDO ROTAS NA APLICACAO
 app.use(campanhaRoutes);
 app.use(socioRoutes);
 
+eureka.startClient();
 
 app.listen(port);
-
 console.log('online @ localhost:' + port);
